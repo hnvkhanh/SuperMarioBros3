@@ -185,6 +185,7 @@
     <Image Include="mario.ico" />
     <Image Include="textures\bbox.png" />
     <Image Include="textures\enemies.png" />
+    <Image Include="textures\enemies_flipped.png" />
     <Image Include="textures\mario.png" />
     <Image Include="textures\mis0_transparent.png" />
     <Image Include="textures\misc.png" />
