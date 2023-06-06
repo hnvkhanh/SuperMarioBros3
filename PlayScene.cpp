@@ -9,6 +9,8 @@
 #include "Portal.h"
 #include "Coin.h"
 #include "Platform.h"
+#include "Bush.h"
+#include "Koopa.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -117,8 +119,10 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		DebugOut(L"[INFO] Player object has been created!\n");
 		break;
 	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(x,y); break;
+	case OBJECT_TYPE_KOOPA: obj = new CKoopa(x, y); break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;
+	case OBJECT_TYPE_BUSH: obj = new CBush(x, y); break;
 
 	case OBJECT_TYPE_PLATFORM:
 	{

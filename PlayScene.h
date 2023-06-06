@@ -6,7 +6,8 @@
 #include "Brick.h"
 #include "Mario.h"
 #include "Goomba.h"
-//#include "Koopas.h"
+#include "Bush.h"
+#include "Koopa.h"
 
 
 class CPlayScene: public CScene
