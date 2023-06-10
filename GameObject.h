@@ -4,6 +4,7 @@
 #include <d3dx10.h>
 #include <vector>
 
+#include "debug.h"
 #include "Animation.h"
 #include "Animations.h"
 #include "Sprites.h"
@@ -35,6 +36,7 @@ protected:
 	bool isDeleted; 
 
 public: 
+
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
 	void GetPosition(float &x, float &y) { x = this->x; y = this->y; }

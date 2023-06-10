@@ -3,8 +3,6 @@
 
 #include "debug.h"
 
-#define BLOCK_PUSH_FACTOR 0.4f
-
 CCollision* CCollision::__instance = NULL;
 
 CCollision* CCollision::GetInstance()
@@ -247,7 +245,7 @@ void CCollision::Process(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* co
 		dy = vy * dt;
 
 		if (colX != NULL && colY != NULL) 
-		{
+		{			
 			if (colY->t < colX->t)	// was collision on Y first ?
 			{
 				y += colY->t * dy + colY->ny * BLOCK_PUSH_FACTOR;

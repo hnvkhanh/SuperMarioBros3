@@ -12,12 +12,15 @@
 #define GOOMBA_BBOX_HEIGHT_DIE 7
 
 #define GOOMBA_DIE_TIMEOUT 500
+#define GOOMBA_BOUNCE_TIMEOUT 80
 
 #define GOOMBA_STATE_WALKING 100
 #define GOOMBA_STATE_DIE 200
+#define GOOMBA_HIT_BY_KOOPA 300
 
 #define ID_ANI_GOOMBA_WALKING 5000
 #define ID_ANI_GOOMBA_DIE 5001
+#define ID_ANI_HIT_BY_KOOPA 5002
 
 class CGoomba : public CGameObject
 {
@@ -26,6 +29,7 @@ protected:
 	float ay; 
 
 	ULONGLONG die_start;
+	ULONGLONG bounce_start;
 
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);

@@ -187,5 +187,8 @@
     <Image Include="textures\enemies_flipped.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="textures\enemies_rotated.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -1,5 +1,7 @@
 #pragma once
 
+#define BLOCK_PUSH_FACTOR 0.4f
+
 #include <Windows.h>
 #include <vector>
 #include <algorithm>
