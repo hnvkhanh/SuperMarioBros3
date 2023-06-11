@@ -87,7 +87,7 @@
     <ClInclude Include="Goomba.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Bush.h">
+    <ClInclude Include="BackgroundObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Koopa.h">
@@ -155,7 +155,7 @@
     <ClCompile Include="debug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Bush.cpp">
+    <ClCompile Include="BackgroundObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Koopa.cpp">
@@ -188,6 +188,12 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="textures\enemies_rotated.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\misc2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\misc2_nobg.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

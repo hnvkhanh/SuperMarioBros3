@@ -6,7 +6,6 @@
 #include "Collision.h"
 
 #include "Brick.h"
-#include "Bush.h"
 #include "Goomba.h"
 #include "Coin.h"
 

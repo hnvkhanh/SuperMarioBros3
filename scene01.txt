@@ -7,6 +7,7 @@ goomba.txt
 cloud.txt
 koopa.txt
 bush.txt
+semiwood.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type

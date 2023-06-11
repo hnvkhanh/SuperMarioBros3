@@ -8,13 +8,13 @@
 #include "Koopa.h"
 #include "Coin.h"
 #include "Portal.h"
-
+#include "Platform.h"
 #include "Collision.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	vy += ay * dt;
-	vx += ax * dt;
+	vx += ax * dt; 
 
 	if (abs(vx) > abs(maxVx)) vx = maxVx;
 
@@ -43,6 +43,9 @@ void CMario::OnNoCollision(DWORD dt)
 
 void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 {
+	if (dynamic_cast<CRectangle*>(e->obj)) {
+		DebugOut(L"collision with rectangle \n");
+	}	
 	if (e->ny != 0 && e->obj->IsBlocking())
 	{
 		vy = 0;
@@ -53,7 +56,7 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	{
 		vx = 0;
 	}
-
+	
 	if (dynamic_cast<CGoomba*>(e->obj))
 		OnCollisionWithGoomba(e);
 	else if (dynamic_cast<CKoopa*>(e->obj))
@@ -62,6 +65,7 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithCoin(e);
 	else if (dynamic_cast<CPortal*>(e->obj))
 		OnCollisionWithPortal(e);
+
 }
 
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)

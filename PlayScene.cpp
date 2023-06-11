@@ -9,7 +9,6 @@
 #include "Portal.h"
 #include "Coin.h"
 #include "Platform.h"
-#include "Bush.h"
 #include "Koopa.h"
 
 #include "SampleKeyEventHandler.h"
@@ -123,6 +122,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;
 	case OBJECT_TYPE_BUSH: obj = new CBush(x, y); break;
+	case OBJECT_TYPE_SINGLE_BG_CLOUD: obj = new CSingleBackgroundCloud(x, y); break;
 
 	case OBJECT_TYPE_PLATFORM:
 	{
@@ -143,6 +143,50 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	}
 
+	case OBJECT_TYPE_RECTANGLE:
+	{	
+		
+		float cell_width = (float)atof(tokens[3].c_str());
+		float cell_height = (float)atof(tokens[4].c_str());
+		int width = atoi(tokens[5].c_str());
+		int height = atoi(tokens[6].c_str());
+		
+		int sprite_begin_top = atoi(tokens[7].c_str());
+		int sprite_middle_top = atoi(tokens[8].c_str());
+		int sprite_end_top = atoi(tokens[9].c_str());
+				
+		int sprite_begin_mid = atoi(tokens[10].c_str());
+		int sprite_middle_mid = atoi(tokens[11].c_str());
+		int sprite_end_mid = atoi(tokens[12].c_str());
+
+
+		int sprite_begin_bottom = atoi(tokens[13].c_str());
+		int sprite_middle_bottom = atoi(tokens[14].c_str());
+		int sprite_end_bottom = atoi(tokens[15].c_str());	
+
+		obj = new CRectangle(
+			x, y,
+			cell_width, cell_height, height, width,
+			sprite_begin_top, sprite_middle_top, sprite_end_top,
+			sprite_begin_mid, sprite_middle_mid, sprite_end_mid,
+			sprite_begin_bottom, sprite_middle_bottom, sprite_end_bottom
+		);		
+
+		CGameObject* obj_0 = new CPlatform(
+			x, y,
+			cell_width, cell_height, width,
+			sprite_begin_top, sprite_middle_top, sprite_end_top
+		);
+		
+		// General object setup
+		obj_0->SetPosition(x, y);
+
+
+		objects.push_back(obj_0);
+
+		break;
+	}
+
 	case OBJECT_TYPE_PORTAL:
 	{
 		float r = (float)atof(tokens[3].c_str());
@@ -157,7 +201,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		DebugOut(L"[ERROR] Invalid object type: %d\n", object_type);
 		return;
 	}
-
+	
 	// General object setup
 	obj->SetPosition(x, y);
 

@@ -1,5 +1,5 @@
 [SETTINGS]
-start	1
+start	5
 width	320
 height	240
 
@@ -20,3 +20,5 @@ height	240
 12	textures\enemies_rotated.png
 20	textures\misc.png
 30	textures\mis0_transparent.png
+40	textures\misc2.png
+41	textures\misc2_nobg.png
