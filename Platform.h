@@ -81,6 +81,8 @@ public:
 //typedef CRectangle* LPRECTANGLE;
 
 
+
+// Pipe
 class CPipe : public CPlatform
 {
 protected:	

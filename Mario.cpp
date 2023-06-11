@@ -10,6 +10,7 @@
 #include "Portal.h"
 #include "Platform.h"
 #include "Collision.h"
+#include "PrizeBlock.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
@@ -65,6 +66,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithCoin(e);
 	else if (dynamic_cast<CPortal*>(e->obj))
 		OnCollisionWithPortal(e);
+	else if (dynamic_cast<CPrizeBlock*>(e->obj))
+		OnCollisionWithPrizeBlock(e);
 
 }
 
