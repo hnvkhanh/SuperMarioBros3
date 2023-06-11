@@ -26,7 +26,6 @@ pipe-rectangle.txt
 #id	x	y	cell_w	cell_h	width	height	id_top_1	id_top_2	id_top_3
 8	350	150	15	15	3	3	46031	46032	46033	46034	46035	46036	46037	46038	46039
 
-
 # MARIO
 0	100	100
 
@@ -44,3 +43,5 @@ pipe-rectangle.txt
 5 	0	195	15	15	30	61000	62000	63000
 
 
+#Pipe
+9	200	150	15	15	3	45001	45002	45101	45102

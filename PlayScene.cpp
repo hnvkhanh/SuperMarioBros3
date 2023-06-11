@@ -187,6 +187,27 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	}
 
+	case OBJECT_TYPE_PIPE:
+	{
+
+		float cell_width = (float)atof(tokens[3].c_str());
+		float cell_height = (float)atof(tokens[4].c_str());
+		int length = atoi(tokens[5].c_str());
+		int sprite_begin_top = atoi(tokens[6].c_str());
+		int sprite_end_top = atoi(tokens[7].c_str());
+		int sprite_begin_body = atoi(tokens[8].c_str());
+		int sprite_end_body = atoi(tokens[9].c_str());
+
+		obj = new CPipe(
+			x, y,
+			cell_width, cell_height, length,
+			sprite_begin_top, sprite_end_top,
+			sprite_begin_body, sprite_end_body
+		);
+
+		break;
+	}
+
 	case OBJECT_TYPE_PORTAL:
 	{
 		float r = (float)atof(tokens[3].c_str());

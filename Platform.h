@@ -33,7 +33,7 @@ public:
 	int IsDirectionColliable(float nx, float ny);
 };
 
-typedef CPlatform* LPPLATFORM;
+//typedef CPlatform* LPPLATFORM;
 
 
 class CRectangle : public CGameObject
@@ -79,3 +79,30 @@ public:
 };
 
 //typedef CRectangle* LPRECTANGLE;
+
+
+class CPipe : public CPlatform
+{
+protected:	
+	int spriteIdBeginTop, spriteIdEndTop, spriteIdBeginBody, spriteIdEndBody;
+
+public:
+	CPipe(float x, float y,
+		float cell_width, float cell_height, int length,
+		int sprite_id_begin_top, int sprite_id_end_top, 
+		int sprite_id_begin_body, int sprite_id_end_body) :CPlatform(x, y,
+			cell_width, cell_height, length, sprite_id_begin_top, sprite_id_end_top, sprite_id_begin_body)
+	{		
+		this->spriteIdBeginTop = sprite_id_begin_top;		
+		this->spriteIdEndTop = sprite_id_end_top;
+		this->spriteIdBeginBody = sprite_id_begin_body;
+		this->spriteIdEndBody = sprite_id_end_body;
+	}
+
+	void Render();
+	void Update(DWORD dt) {}
+	int IsDirectionColliable(float nx, float ny);
+	void GetBoundingBox(float& l, float& t, float& r, float& b);
+	void RenderBoundingBox();
+	virtual int IsBlocking() { return 1; };
+};
