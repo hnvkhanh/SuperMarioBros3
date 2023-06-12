@@ -66,3 +66,46 @@ void CMushroom::OnNoCollision(DWORD dt)
 	x += vx * dt;
 	y += vy * dt;
 };
+
+void CBouncingCoin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+{	
+	y += vy * dt;
+
+	if ((state == COIN_STATE_BOUNCE_UP) && (GetTickCount64() - bounce_start > COIN_BOUNCING_TIMEOUT))
+	{
+		SetState(COIN_STATE_DROP_DOWN);
+	}
+
+	if ((state == COIN_STATE_DROP_DOWN) && (GetTickCount64() - bounce_start > COIN_BOUNCING_TIMEOUT))
+	{
+		this->Delete();
+	}
+
+	CGameObject::Update(dt, coObjects);
+	CCollision::GetInstance()->Process(this, dt, coObjects);
+}
+
+void CBouncingCoin::Render()
+{
+
+	CAnimations* animations = CAnimations::GetInstance();
+	animations->Get(ID_ANI_COIN_SPEED_UP)->Render(x, y);
+
+	//RenderBoundingBox();
+}
+
+void CBouncingCoin::SetState(int state)
+{
+	CGameObject::SetState(state);
+	switch (state)
+	{
+	case  COIN_STATE_BOUNCE_UP:
+		vy = -COIN_BOUNCE_SPEED;
+		bounce_start = GetTickCount64();
+		break;
+	case  COIN_STATE_DROP_DOWN:
+		vy = COIN_BOUNCE_SPEED;
+		bounce_start = GetTickCount64();
+		break;
+	}
+}
