@@ -43,7 +43,7 @@ pipe-rectangle.txt
 
 #prize block
 10	150	130
-
+#mushroom
 11	140	130
 
 #Platform

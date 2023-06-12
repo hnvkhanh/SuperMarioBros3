@@ -11,6 +11,7 @@
 #include "Platform.h"
 #include "Collision.h"
 #include "PrizeBlock.h"
+#include "Prize.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
@@ -30,6 +31,12 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		kick_start = -1;
 		kickSomething = false;		
 	}
+	if (GetTickCount64() - transform_start > MARIO_TRANSFORM_TIMEOUT && transforming)
+	{
+		transform_start = -1;
+		transforming = false;
+		SetLevel(MARIO_LEVEL_BIG);
+	}
 
 	isOnPlatform = false;
 
@@ -39,7 +46,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 void CMario::OnNoCollision(DWORD dt)
 {
 	x += vx * dt;
-	y += vy * dt;
+	y += vy * dt;	
 }
 
 void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
@@ -68,6 +75,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithPortal(e);
 	else if (dynamic_cast<CPrizeBlock*>(e->obj))
 		OnCollisionWithPrizeBlock(e);
+	else if (dynamic_cast<CMushroom*>(e->obj))
+		OnCollisionWithMushroom(e);
 
 }
 
@@ -109,6 +118,7 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 			{
 				if (level > MARIO_LEVEL_SMALL)
 				{
+					DebugOut(L"touch goomba\n");
 					level = MARIO_LEVEL_SMALL;
 					StartUntouchable();
 				}
@@ -151,10 +161,11 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 		if (untouchable == 0)
 		{
 			if (koopa->GetState() != KOOPA_STATE_DIE && koopa->GetState() != KOOPA_STATE_REVIVE)
-			{
+			{	
+				
 				if (level > MARIO_LEVEL_SMALL)
-				{
-					level = MARIO_LEVEL_SMALL;
+				{					
+					level = MARIO_LEVEL_SMALL;					
 					StartUntouchable();
 				}
 				else
@@ -182,6 +193,16 @@ void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
 {
 	e->obj->Delete();
 	coin++;
+}
+
+void CMario::OnCollisionWithMushroom(LPCOLLISIONEVENT e)
+{
+	e->obj->Delete();	
+	if (level == MARIO_LEVEL_SMALL) {
+		DebugOut(L"transforming\n");
+		SetState(MARIO_STATE_TRANSFORM_TO_BIG);
+	}
+	
 }
 
 void CMario::OnCollisionWithPortal(LPCOLLISIONEVENT e)
@@ -251,6 +272,13 @@ int CMario::GetAniIdSmall()
 				else
 					aniId = ID_ANI_MARIO_SMALL_KICK_LEFT;
 			}
+			else if (transforming) {
+				if (nx > 0)
+					aniId = ID_ANI_TRANSFORM_TO_BIG_RIGHT;
+				else
+					aniId = ID_ANI_TRANSFORM_TO_BIG_LEFT;
+			}
+	
 	
 
 	if (aniId == -1) aniId = ID_ANI_MARIO_SMALL_IDLE_RIGHT;
@@ -320,6 +348,7 @@ int CMario::GetAniIdBig()
 				else
 					aniId = ID_ANI_MARIO_KICK_LEFT;
 			}
+			
 
 	if (aniId == -1) aniId = ID_ANI_MARIO_IDLE_RIGHT;
 
@@ -424,6 +453,13 @@ void CMario::SetState(int state)
 	case MARIO_STATE_KICK_RIGHT:
 		kickSomething = true;
 		kick_start = GetTickCount64();
+		break;
+	case MARIO_STATE_TRANSFORM_TO_BIG:		
+		DebugOut(L"transform happen\n");
+		transforming = true;
+		transform_start = GetTickCount64();		
+		break;
+				
 	}
 	
 
@@ -460,6 +496,7 @@ void CMario::GetBoundingBox(float &left, float &top, float &right, float &bottom
 
 void CMario::SetLevel(int l)
 {
+	DebugOut(L"change level state %d\n", state);
 	// Adjust position to avoid falling off platform
 	if (this->level == MARIO_LEVEL_SMALL)
 	{

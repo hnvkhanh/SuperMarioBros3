@@ -36,6 +36,8 @@
 #define MARIO_STATE_KICK_RIGHT 700
 #define MARIO_STATE_KICK_LEFT 701
 
+#define MARIO_STATE_TRANSFORM_TO_BIG 800
+
 
 #pragma region ANIMATION_ID
 
@@ -87,12 +89,16 @@
 #define ID_ANI_MARIO_SMALL_KICK_LEFT 1700
 #define ID_ANI_MARIO_SMALL_KICK_RIGHT 1701
 
+#define ID_ANI_TRANSFORM_TO_BIG_LEFT 1801
+#define ID_ANI_TRANSFORM_TO_BIG_RIGHT 1800
+
 #pragma endregion
 
 #define GROUND_Y 160.0f
 
 
 #define MARIO_KICK_TIMEOUT 200
+#define MARIO_TRANSFORM_TIMEOUT 1000
 
 #define	MARIO_LEVEL_SMALL	1
 #define	MARIO_LEVEL_BIG		2
@@ -114,6 +120,7 @@ class CMario : public CGameObject
 {
 	BOOLEAN isSitting;
 	BOOLEAN kickSomething;
+	BOOLEAN transforming;
 	float maxVx;
 	float ax;				// acceleration on x 
 	float ay;				// acceleration on y 
@@ -122,12 +129,14 @@ class CMario : public CGameObject
 	int untouchable; 
 	ULONGLONG untouchable_start;
 	ULONGLONG kick_start;
+	ULONGLONG transform_start;
 	BOOLEAN isOnPlatform;
 	int coin; 
 
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
 	void OnCollisionWithKoopa(LPCOLLISIONEVENT e);
 	void OnCollisionWithCoin(LPCOLLISIONEVENT e);
+	void OnCollisionWithMushroom(LPCOLLISIONEVENT e);
 	void OnCollisionWithPortal(LPCOLLISIONEVENT e);
 	void OnCollisionWithPrizeBlock(LPCOLLISIONEVENT e);
 
@@ -139,6 +148,7 @@ public:
 	{
 		isSitting = false;
 		kickSomething = false;
+		transforming = false;
 		maxVx = 0.0f;
 		ax = 0.0f;
 		ay = MARIO_GRAVITY; 
@@ -147,6 +157,7 @@ public:
 		untouchable = 0;
 		untouchable_start = -1;
 		kick_start = -1;
+		transform_start = -1;
 		isOnPlatform = false;
 		coin = 0;
 	}

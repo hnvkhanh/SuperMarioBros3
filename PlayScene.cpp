@@ -322,6 +322,9 @@ void CPlayScene::Update(DWORD dt)
 			CPrizeBlock* prizeBlock = dynamic_cast<CPrizeBlock*>(objects[i]);
 			if (prizeBlock->GetKnownState() == 1) {
 				prizeBlock->SetKnownState();
+				float x, y;
+				prizeBlock->GetPosition(x, y);
+				objects.push_back(new CMushroom(x, y - 20));
 				// Do something to make mushroom appear
 			}
 			
