@@ -126,9 +126,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(x,y); break;
 	case OBJECT_TYPE_KOOPA: obj = new CKoopa(x, y); break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
-	case OBJECT_TYPE_PRIZEBLOCK: obj = new CPrizeBlock(x, y); break;
-	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;
-	case OBJECT_TYPE_MUSHROOM: obj = new CMushroom(x, y); break;
+	case OBJECT_TYPE_PRIZEBLOCK: 		
+		obj = new CPrizeBlock(x, y, atoi(tokens[3].c_str())); break;
+	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;	
 	case OBJECT_TYPE_BUSH: obj = new CBush(x, y); break;
 	case OBJECT_TYPE_SINGLE_BG_CLOUD: obj = new CSingleBackgroundCloud(x, y); break;
 
@@ -329,7 +329,8 @@ void CPlayScene::Update(DWORD dt)
 				float x, y;
 				prizeBlock->GetPosition(x, y);				
 				// Do something to make mushroom appear
-				objects.insert(objects.begin() + i, new CMushroom(x, y - BRICK_BBOX_HEIGHT / 2));
+				if  (prizeBlock->getIsMushroom() == 1)
+					objects.insert(objects.begin() + i, new CMushroom(x, y - BRICK_BBOX_HEIGHT / 2));
 			}
 			
 

@@ -23,15 +23,16 @@ class CPrizeBlock : public CBrick
 {
 protected:
 	float ay;
-	int bounce_start, isKnown;	
+	int bounce_start, isKnown, isMushroom;;
 	float x_fixed, y_fixed;
 	int IsCollidable(float nx, float ny);
 	int IsBlocking() { return 1; };
 	virtual void Render();
-	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
+	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);	
 public:
-	CPrizeBlock(float x, float y) : CBrick(x, y) {	
+	CPrizeBlock(float x, float y, int mushroom) : CBrick(x, y) {	
 		isKnown = 0;
+		isMushroom = mushroom;
 		ay = 0;
 		x_fixed = x;
 		y_fixed = y;
@@ -42,6 +43,7 @@ public:
 	void ResetPosition();
 	void SetKnownState();
 	int GetKnownState() { return isKnown; };
+	int getIsMushroom() { return isMushroom; };
 	virtual void SetState(int state);
 };
 
