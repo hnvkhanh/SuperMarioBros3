@@ -1,9 +1,13 @@
 #include "Prize.h"
 
-void CMushroom::Update(DWORD dt)
+void CMushroom::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	x += vx * dt;
-	y += vy * dt;
+	if (y > y_rise) {
+		y += vy * dt;
+	}
+	
+	CGameObject::Update(dt, coObjects);
+	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
 void CMushroom::Render()

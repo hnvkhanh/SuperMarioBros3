@@ -1,5 +1,9 @@
 #include <iostream>
 #include <fstream>
+
+#include <vector>
+#include <algorithm>
+
 #include "AssetIDs.h"
 
 #include "PlayScene.h"
@@ -318,17 +322,21 @@ void CPlayScene::Update(DWORD dt)
 	for (size_t i = 0; i < objects.size(); i++)
 	{
 		objects[i]->Update(dt, &coObjects);
-		if (dynamic_cast<CPrizeBlock*>(objects[i])) {			
+		if (dynamic_cast<CPrizeBlock*>(objects[i])) {
 			CPrizeBlock* prizeBlock = dynamic_cast<CPrizeBlock*>(objects[i]);
 			if (prizeBlock->GetKnownState() == 1) {
 				prizeBlock->SetKnownState();
 				float x, y;
-				prizeBlock->GetPosition(x, y);
-				objects.push_back(new CMushroom(x, y - 20));
+				prizeBlock->GetPosition(x, y);				
 				// Do something to make mushroom appear
+				objects.insert(objects.begin() + i, new CMushroom(x, y - BRICK_BBOX_HEIGHT / 2));
 			}
 			
+
 		}
+		
+		
+		
 	}
 
 	// skip the rest if scene was already unloaded (Mario::Update might trigger PlayScene::Unload)

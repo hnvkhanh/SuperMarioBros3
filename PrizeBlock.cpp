@@ -24,7 +24,7 @@ void CPrizeBlock::SetState(int state)
 	{
 	case  PRIZEBLOCK_STATE_KNOWN_MOVING_UP:
 		ay = -PRIZEBLOCK_BOUNCE_SPEED_Y;
-		bounce_start = GetTickCount64();
+		bounce_start = GetTickCount64();		
 		break;
 	case  PRIZEBLOCK_STATE_KNOWN_MOVING_DOWN:
 		vy = -vy;
@@ -75,8 +75,7 @@ void CPrizeBlock::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		SetState(PRIZEBLOCK_STATE_KNOWN_MOVING_DOWN);				
 	}
 	else if ((state == PRIZEBLOCK_STATE_KNOWN_MOVING_DOWN) && (GetTickCount64() - bounce_start > BOUNCING_TIMEOUT))
-	{
-		DebugOut(L"start to move down \n");
+	{		
 		SetState(PRIZEBLOCK_STATE_KNOWN_STATIC);
 	}
 
