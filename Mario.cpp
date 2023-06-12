@@ -71,6 +71,20 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 
 }
 
+void CMario::OnCollisionWithPrizeBlock(LPCOLLISIONEVENT e)
+{
+	CPrizeBlock* prizeBlock = dynamic_cast<CPrizeBlock*>(e->obj);
+
+	// jump on top >> kill Goomba and deflect a bit 
+	if (e->ny > 0 && e->nx == 0)		
+	{		
+		prizeBlock->SetState(PRIZEBLOCK_STATE_KNOWN_MOVING_UP);
+	}	
+	prizeBlock->ResetPosition();
+	
+	
+}
+
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 {
 	CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);

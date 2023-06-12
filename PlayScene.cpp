@@ -10,6 +10,7 @@
 #include "Coin.h"
 #include "Platform.h"
 #include "Koopa.h"
+#include "PrizeBlock.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -120,6 +121,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(x,y); break;
 	case OBJECT_TYPE_KOOPA: obj = new CKoopa(x, y); break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
+	case OBJECT_TYPE_PRIZEBLOCK: obj = new CPrizeBlock(x, y); break;
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;
 	case OBJECT_TYPE_BUSH: obj = new CBush(x, y); break;
 	case OBJECT_TYPE_SINGLE_BG_CLOUD: obj = new CSingleBackgroundCloud(x, y); break;

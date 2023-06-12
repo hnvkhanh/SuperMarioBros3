@@ -10,14 +10,13 @@
 #define PRIZEBLOCK_STATE_KNOWN_MOVING_DOWN 102
 #define PRIZEBLOCK_STATE_KNOWN_STATIC 103
 
-#define ID_ANI_PRIZEBLOCK_MYSTIC 21001
-#define ID_ANI_PRIZEBLOCK_KNOWN 21002
+#define ID_ANI_PRIZEBLOCK_MYSTIC 10001
+#define ID_ANI_PRIZEBLOCK_KNOWN 10002
 
 
-#define PRIZEBLOCK_GRAVITY 0.002f
-#define PRIZEBLOCK_BOUNCE_SPEED_Y 0.5f
+#define PRIZEBLOCK_BOUNCE_SPEED_Y 0.002f
 
-#define BOUNCING_TIMEOUT 500
+#define BOUNCING_TIMEOUT 50
 
 
 class CPrizeBlock : public CBrick
@@ -25,15 +24,21 @@ class CPrizeBlock : public CBrick
 protected:
 	float ay;
 	int bounce_start;	
-	virtual int IsCollidable() { return 1; };
+	float x_fixed, y_fixed;
+	int IsCollidable(float nx, float ny);
+	int IsBlocking() { return 1; };
 	virtual void Render();
+	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 public:
 	CPrizeBlock(float x, float y) : CBrick(x, y) {		
 		ay = 0;
+		x_fixed = x;
+		y_fixed = y;
 		bounce_start = -1;
 		SetState(PRIZEBLOCK_STATE_MYSTIC);
 	}	
 	void Update(DWORD dt) {}	
+	void ResetPosition();
 	virtual void SetState(int state);
 };
 
