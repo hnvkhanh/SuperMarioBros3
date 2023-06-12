@@ -42,17 +42,21 @@ pipe-rectangle.txt
 9	200	150	15	15	3	45001	45002	45101	45102
 
 #prize block
-10	150	130	0
-10	130	130	1
+#id	x	y	type_of_prize
+#1 for mushroom
+#other for coin
+10	135	110	0
+10	150	110	1
 
 
 
 #COIN
-4	100	100
-4	120	100
-4	140	100
-4	160	100
-4	180	100
+4	100	90
+4	120	90
+4	140	90
+4	160	90
+4	180	90
+
 
 #Platform
 #id	x	y	w	h	length	id1	id2	id3

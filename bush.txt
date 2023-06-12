@@ -2,6 +2,13 @@
 [SPRITES]
 60000	520	214	651	280	30
 
+#piranha plant
+80001	150	62	167	85	10
+80002	196	62	213	85	10
+
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
 70000	60000	1000
+
+#priranha plant
+80001	80001	300	80002	300

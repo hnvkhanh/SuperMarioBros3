@@ -16,6 +16,7 @@
 #include "Koopa.h"
 #include "PrizeBlock.h"
 #include "Prize.h"
+#include "Piranha.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -131,6 +132,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;	
 	case OBJECT_TYPE_BOUNCING_COIN: obj = new CBouncingCoin(x, y); break;
 	case OBJECT_TYPE_BUSH: obj = new CBush(x, y); break;
+	case OBJECT_TYPE_PIRANHA: obj = new CPiranha(x, y); break;
 	case OBJECT_TYPE_SINGLE_BG_CLOUD: obj = new CSingleBackgroundCloud(x, y); break;
 
 	case OBJECT_TYPE_PLATFORM:
@@ -206,6 +208,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		int sprite_end_top = atoi(tokens[7].c_str());
 		int sprite_begin_body = atoi(tokens[8].c_str());
 		int sprite_end_body = atoi(tokens[9].c_str());
+
+		objects.push_back(new CPiranha(x + PIRANHA_BBOX_WIDTH / 2, y + PIRANHA_BBOX_WIDTH / 3));
 
 		obj = new CPipe(
 			x, y,
@@ -338,8 +342,6 @@ void CPlayScene::Update(DWORD dt)
 			
 
 		}
-		
-		
 		
 	}
 
