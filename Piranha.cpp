@@ -13,7 +13,7 @@ void CPiranha::Render()
 	CAnimations* animations = CAnimations::GetInstance();
 	animations->Get(ID_ANI_PIRANHA)->Render(x, y);
 
-	RenderBoundingBox();
+	/*RenderBoundingBox();*/
 }
 
 void CPiranha::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -60,6 +60,7 @@ void CPiranha::SetState(int state)
 		vy = 0;		
 		wait_start = GetTickCount64();
 		up_start = -1;
+		ResetPosition();
 		break;
 	}
 }

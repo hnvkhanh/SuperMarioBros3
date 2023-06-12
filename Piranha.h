@@ -17,7 +17,7 @@
 
 #define PIRANHA_SPEED 0.025f
 
-#define PIRANHA_TIMEOUT 1100
+#define PIRANHA_TIMEOUT 1150
 #define PIRANHA_WAIT_TIMEOUT 3000
 
 
@@ -28,11 +28,13 @@ protected:
 	virtual void OnNoCollision(DWORD dt) { return; };
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e) { return; };
 	ULONGLONG up_start, wait_start;		
+	float y_fixed;
 public:
 	CPiranha(float x, float y) : CGameObject(x, y) {
 		up_start = -1;
 		wait_start = -1;		
 		SetState(PIRANHA_STATE_WAIT);
+		y_fixed = y;
 		
 	};
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
@@ -43,6 +45,9 @@ public:
 	int IsCollidable()
 	{
 		return (state != PIRANHA_STATE_WAIT);
+	}
+	void ResetPosition() {
+		y = y_fixed;
 	}
 };
 
