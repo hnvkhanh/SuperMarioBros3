@@ -7,6 +7,16 @@ void CPrizeBlock::ResetPosition()
 	return;
 }
 
+void CPrizeBlock::SetKnownState()
+{
+	if (isKnown == 0) {
+		isKnown = 1;
+	}
+	else if (isKnown == 1) {
+		isKnown = -1;
+	}
+}
+
 void CPrizeBlock::SetState(int state)
 {
 	CGameObject::SetState(state);

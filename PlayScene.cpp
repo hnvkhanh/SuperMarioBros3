@@ -11,6 +11,7 @@
 #include "Platform.h"
 #include "Koopa.h"
 #include "PrizeBlock.h"
+#include "Prize.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -123,6 +124,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
 	case OBJECT_TYPE_PRIZEBLOCK: obj = new CPrizeBlock(x, y); break;
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;
+	case OBJECT_TYPE_MUSHROOM: obj = new CMushroom(x, y); break;
 	case OBJECT_TYPE_BUSH: obj = new CBush(x, y); break;
 	case OBJECT_TYPE_SINGLE_BG_CLOUD: obj = new CSingleBackgroundCloud(x, y); break;
 
@@ -316,6 +318,14 @@ void CPlayScene::Update(DWORD dt)
 	for (size_t i = 0; i < objects.size(); i++)
 	{
 		objects[i]->Update(dt, &coObjects);
+		if (dynamic_cast<CPrizeBlock*>(objects[i])) {			
+			CPrizeBlock* prizeBlock = dynamic_cast<CPrizeBlock*>(objects[i]);
+			if (prizeBlock->GetKnownState() == 1) {
+				prizeBlock->SetKnownState();
+				// Do something to make mushroom appear
+			}
+			
+		}
 	}
 
 	// skip the rest if scene was already unloaded (Mario::Update might trigger PlayScene::Unload)

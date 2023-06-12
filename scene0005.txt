@@ -44,6 +44,8 @@ pipe-rectangle.txt
 #prize block
 10	150	130
 
+11	140	130
+
 #Platform
 #id	x	y	w	h	length	id1	id2	id3
 5 	0	195	15	15	30	61000	62000	63000

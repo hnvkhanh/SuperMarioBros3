@@ -77,8 +77,11 @@ void CMario::OnCollisionWithPrizeBlock(LPCOLLISIONEVENT e)
 
 	// jump on top >> kill Goomba and deflect a bit 
 	if (e->ny > 0 && e->nx == 0)		
-	{		
-		prizeBlock->SetState(PRIZEBLOCK_STATE_KNOWN_MOVING_UP);
+	{	
+		if (prizeBlock->GetState() == PRIZEBLOCK_STATE_MYSTIC) {
+			prizeBlock->SetKnownState();
+		}
+		prizeBlock->SetState(PRIZEBLOCK_STATE_KNOWN_MOVING_UP);		
 	}	
 	prizeBlock->ResetPosition();
 	
