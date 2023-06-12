@@ -12,6 +12,7 @@
 #include "Collision.h"
 #include "PrizeBlock.h"
 #include "Prize.h"
+#include "Piranha.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
@@ -77,6 +78,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithPrizeBlock(e);
 	else if (dynamic_cast<CMushroom*>(e->obj))
 		OnCollisionWithMushroom(e);
+	else if (dynamic_cast<CPiranha*>(e->obj))
+		OnCollisionWithPiranha(e);
 
 }
 
@@ -94,6 +97,28 @@ void CMario::OnCollisionWithPrizeBlock(LPCOLLISIONEVENT e)
 	}	
 	prizeBlock->ResetPosition();
 	
+	
+}
+
+void CMario::OnCollisionWithPiranha(LPCOLLISIONEVENT e)
+{
+	CPiranha* piranha = dynamic_cast<CPiranha*>(e->obj);
+
+		
+	if (untouchable == 0)
+	{		
+		if (level > MARIO_LEVEL_SMALL)
+		{			
+			level = MARIO_LEVEL_SMALL;
+			StartUntouchable();
+		}
+		else
+		{
+			DebugOut(L">>> Mario DIE >>> \n");
+			SetState(MARIO_STATE_DIE);
+		}
+		
+	}
 	
 }
 

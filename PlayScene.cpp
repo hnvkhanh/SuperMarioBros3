@@ -208,8 +208,13 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		int sprite_end_top = atoi(tokens[7].c_str());
 		int sprite_begin_body = atoi(tokens[8].c_str());
 		int sprite_end_body = atoi(tokens[9].c_str());
-
-		objects.push_back(new CPiranha(x + PIRANHA_BBOX_WIDTH / 2, y + PIRANHA_BBOX_WIDTH / 3));
+		int plant_type = atoi(tokens[10].c_str()); // 0 - Piranha, 1 - Venus Fire Trap, other - None
+		if (plant_type == 0)
+			objects.push_back(new CPiranha(x + PIRANHA_BBOX_WIDTH / 2, y + PIRANHA_BBOX_WIDTH / 3));
+		else if (plant_type == 1)
+		{
+			//add venus fire trap 
+		}
 
 		obj = new CPipe(
 			x, y,

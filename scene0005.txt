@@ -38,8 +38,9 @@ pipe-rectangle.txt
 2	300	10
 
 #Pipe
-#id	x	y	w	h	height	id1	id2	id3 id4
-9	200	150	15	15	3	45001	45002	45101	45102
+#id	x	y	w	h	height	id1	id2	id3 id4 plant_type
+# 0 - piranha, 1 - venus fire trap, other - None
+9	200	150	15	15	3	45001	45002	45101	45102	0
 
 #prize block
 #id	x	y	type_of_prize
