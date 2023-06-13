@@ -38,7 +38,7 @@ pipe-rectangle.txt
 2	300	10
 
 #para-goomba
-14	250	10
+14	250	100
 
 #Pipe
 #id	x	y	w	h	height	id1	id2	id3 id4 plant_type

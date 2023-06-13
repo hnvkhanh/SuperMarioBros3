@@ -26,7 +26,7 @@
 34102	87	13	105	30	13
 #FLY
 34201	110	5	130	30	13
-34202	122	5	142	30	13
+34202	134	5	154	30	13
 
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
