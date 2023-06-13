@@ -66,7 +66,9 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		vx = 0;
 	}
 	
-	if (dynamic_cast<CGoomba*>(e->obj))
+	if (dynamic_cast<CParaGoomba*>(e->obj))
+		OnCollisionWithParaGoomba(e);
+	else if (dynamic_cast<CGoomba*>(e->obj))
 		OnCollisionWithGoomba(e);
 	else if (dynamic_cast<CKoopa*>(e->obj))
 		OnCollisionWithKoopa(e);
@@ -140,6 +142,52 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 		if (untouchable == 0)
 		{
 			if (goomba->GetState() != GOOMBA_STATE_DIE)
+			{
+				if (level > MARIO_LEVEL_SMALL)
+				{					
+					level = MARIO_LEVEL_SMALL;
+					StartUntouchable();
+				}
+				else
+				{
+					DebugOut(L">>> Mario DIE >>> \n");
+					SetState(MARIO_STATE_DIE);
+				}
+			}
+		}
+	}
+}
+
+void CMario::OnCollisionWithParaGoomba(LPCOLLISIONEVENT e)
+{
+	CParaGoomba* paragoomba = dynamic_cast<CParaGoomba*>(e->obj);	
+	float x_koopa, y_koopa;
+	paragoomba->GetPosition(x_koopa, y_koopa);
+	// jump on top >> kill Goomba and deflect a bit 
+	if (e->ny < 0)
+	{					
+		if (paragoomba->GetState() != GOOMBA_STATE_DIE)
+		{
+			if (paragoomba->GetState() == PARAGOOMBA_STATE_WING_FLYING ||
+				paragoomba->GetState() == PARAGOOMBA_STATE_WING_WALKING) {				
+				paragoomba->SetState(GOOMBA_STATE_WALKING);
+				y_koopa -= (e->t * e->dy + e->ny * BLOCK_PUSH_FACTOR);
+				paragoomba->SetPosition(x_koopa, y_koopa);
+				
+			}				
+			else {
+				paragoomba->SetState(GOOMBA_STATE_DIE);
+			}
+			
+
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+	}
+	else // hit by Goomba
+	{
+		if (untouchable == 0)
+		{
+			if (paragoomba->GetState() != GOOMBA_STATE_DIE)
 			{
 				if (level > MARIO_LEVEL_SMALL)
 				{

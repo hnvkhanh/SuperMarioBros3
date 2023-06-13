@@ -29,14 +29,11 @@
 #define PARAGOOMBA_FLYING_BBOX_WIDTH 20
 #define PARAGOOMBA_FLYING_BBOX_HEIGHT 25
 
-#define PARAGOOMBA_WINGWALKING_BBOX_WIDTH 20
-#define PARAGOOMBA_WINGWALKING_BBOX_HEIGHT 20
+#define PARAGOOMBA_WINGWALKING_BBOX_WIDTH 16
+#define PARAGOOMBA_WINGWALKING_BBOX_HEIGHT 14
 
 #define PARAGOOMBA_STATE_WING_FLYING 410
 #define PARAGOOMBA_STATE_WING_WALKING 411
-#define PARAGOOMBA_STATE_NO_WING_WALKING 420
-#define PARAGOOMBA_STATE_DIE 430
-#define PARAGOOMBA_STATE_HIT_BY_KOOPA 440
 
 #define PARAGOOMBA_FLYING_TIMEOUT 1000
 
@@ -68,7 +65,7 @@ protected:
 
 public: 	
 	CGoomba(float x, float y);
-	virtual void SetState(int state);
+	virtual void SetState(int state);	
 };
 
 
@@ -78,7 +75,11 @@ public:
 class CParaGoomba : public CGoomba
 {
 protected:		
-	virtual void Render();		
+	float y_old, x_old;
+	virtual void Render();			
+	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 public:
 	CParaGoomba(float x, float y);		
+	virtual void SetState(int state);
+
 };
