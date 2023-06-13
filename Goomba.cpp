@@ -118,3 +118,27 @@ void CGoomba::SetState(int state)
 			break;
 	}
 }
+
+void CParaGoomba::Render()
+{
+	int aniId = ID_ANI_PARAGOOMBA_WALKING;
+	if (state == GOOMBA_STATE_DIE)
+	{
+		aniId = ID_ANI_PARAGOOMBA_DIE;
+	}
+	else if (state == GOOMBA_HIT_BY_KOOPA) {
+		aniId = ID_ANI_PARAGOOMBA_HIT_BY_KOOPA;
+	}
+
+	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
+	/*RenderBoundingBox();*/
+}
+
+CParaGoomba::CParaGoomba(float x, float y):CGoomba(x, y)
+{
+	this->ax = 0;
+	this->ay = GOOMBA_GRAVITY;
+	die_start = -1;
+	bounce_start = -1;
+	SetState(GOOMBA_STATE_WALKING);
+}

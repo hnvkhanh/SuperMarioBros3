@@ -62,7 +62,7 @@ void CPrizeBlock::Render()
 	}
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
-	RenderBoundingBox();
+	/*RenderBoundingBox();*/
 }
 
 void CPrizeBlock::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
