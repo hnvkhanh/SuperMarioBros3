@@ -77,7 +77,7 @@ void CVenusFireTrap::Render()
 {
 	int aniID = ID_ANI_RED_VENUS_RISING;
 	if (state == VENUS_STATE_IDLE) {
-		if (mario_on_left_side) {
+		if (IsMarioOnLeft()) {
 			aniID = ID_ANI_RED_VENUS_LOOK_DOWN_LEFT;
 		}
 		else {
@@ -113,4 +113,19 @@ void CVenusFireTrap::SetState(int state)
 		idle_start = GetTickCount64();
 		break;	
 	}
+}
+
+void CVenusFireTrap::GetMarioPosition(float x, float y)
+{
+	x_mario = x;
+	y_mario = y;
+}
+
+bool CVenusFireTrap::IsMarioOnLeft()
+{
+	if (x > x_mario) {
+		return true;
+	}
+	else
+		return false;
 }

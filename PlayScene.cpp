@@ -334,7 +334,7 @@ void CPlayScene::Update(DWORD dt)
 	{
 		coObjects.push_back(objects[i]);
 	}
-
+	float x_mario, y_mario;
 	for (size_t i = 0; i < objects.size(); i++)
 	{
 		objects[i]->Update(dt, &coObjects);
@@ -350,6 +350,14 @@ void CPlayScene::Update(DWORD dt)
 				else
 					objects.insert(objects.begin() + i, new CBouncingCoin(x, y - BRICK_BBOX_HEIGHT / 2));
 			}			
+		}
+		else if (dynamic_cast<CMario*>(objects[i])) {
+			CMario* mario = dynamic_cast<CMario*>(objects[i]);
+			mario->GetPosition(x_mario, y_mario);			
+		}
+		else if (dynamic_cast<CVenusFireTrap*>(objects[i])) {
+			CVenusFireTrap* venus = dynamic_cast<CVenusFireTrap*>(objects[i]);
+			venus->GetMarioPosition(x_mario, y_mario);
 		}
 		
 	}

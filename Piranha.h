@@ -77,19 +77,22 @@ public:
 	}
 };
 
+
+
 class CVenusFireTrap : public CPiranha {
 protected:
 	ULONGLONG idle_start;
-	bool mario_on_left_side;
+	float x_mario, y_mario;
 public:
 	CVenusFireTrap(float x, float y) : CPiranha(x, y) {
 		idle_start = -1;
-		speed = VENUS_SPEED;
-		mario_on_left_side = true;
+		speed = VENUS_SPEED;		
 	};
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 	void Render();
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void SetState(int state);
+	void GetMarioPosition(float x, float y);
+	bool IsMarioOnLeft();
 };
 
