@@ -77,12 +77,23 @@ void CVenusFireTrap::Render()
 {
 	int aniID = ID_ANI_RED_VENUS_RISING;
 	if (state == VENUS_STATE_IDLE) {
-		if (IsMarioOnLeft()) {
-			aniID = ID_ANI_RED_VENUS_LOOK_DOWN_LEFT;
+		if (IsMarioHigher()) {
+			if (IsMarioOnLeft()) {
+				aniID = ID_ANI_RED_VENUS_LOOK_UP_LEFT;
+			}
+			else {
+				aniID = ID_ANI_RED_VENUS_LOOK_UP_RIGHT;
+			}
 		}
 		else {
-			aniID = ID_ANI_RED_VENUS_LOOK_DOWN_RIGHT;
+			if (IsMarioOnLeft()) {
+				aniID = ID_ANI_RED_VENUS_LOOK_DOWN_LEFT;
+			}
+			else {
+				aniID = ID_ANI_RED_VENUS_LOOK_DOWN_RIGHT;
+			}
 		}
+		
 	}
 	CAnimations* animations = CAnimations::GetInstance();
 	animations->Get(aniID)->Render(x, y);
@@ -128,4 +139,12 @@ bool CVenusFireTrap::IsMarioOnLeft()
 	}
 	else
 		return false;
+}
+
+bool CVenusFireTrap::IsMarioHigher()
+{
+	if (y > y_mario)
+		return false;
+	else
+		return true;
 }

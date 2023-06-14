@@ -86,7 +86,9 @@ protected:
 public:
 	CVenusFireTrap(float x, float y) : CPiranha(x, y) {
 		idle_start = -1;
-		speed = VENUS_SPEED;		
+		speed = VENUS_SPEED;
+		x_mario = 0;
+		y_mario = 0;
 	};
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 	void Render();
@@ -94,5 +96,6 @@ public:
 	virtual void SetState(int state);
 	void GetMarioPosition(float x, float y);
 	bool IsMarioOnLeft();
+	bool IsMarioHigher();
 };
 
