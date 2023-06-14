@@ -248,10 +248,18 @@ void CParaTroopa::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (state == PARATROOPA_STATE_FLY_UP || state == PARATROOPA_STATE_FLY_DOWN) {
 		if (e->ny < 0 && state == PARATROOPA_STATE_FLY_DOWN)
 		{
-			SetState(PARATROOPA_STATE_FLY_UP);
+			if (GetTickCount64() - wait_start > PARATROOPA_WAIT_TIMEOUT) {
+				wait_start = -1;
+				DebugOut(L"finish wait\n");
+				SetState(PARATROOPA_STATE_FLY_UP);
+			}
+			else {
+				vy = 0;
+			}			
+			
 		}
 		else if (e->ny > 0 && state == PARATROOPA_STATE_FLY_UP) {
-			SetState(PARATROOPA_STATE_FLY_DOWN);
+			SetState(PARATROOPA_STATE_FLY_DOWN);			
 		}
 		else if (e->nx != 0)
 		{
@@ -283,6 +291,7 @@ CParaTroopa::CParaTroopa(float x, float y) : CKoopa(x, y)
 {
 	go_left = true;
 	fly_start = -1;
+	wait_start = -1;
 	SetState(PARATROOPA_STATE_FLY_DOWN);
 }
 
@@ -300,6 +309,7 @@ void CParaTroopa::SetState(int state)
 	case PARATROOPA_STATE_FLY_DOWN:
 		vy = 0;
 		ay = KOOPA_GRAVITY;		
+		wait_start = GetTickCount64();
 		break;
 	}
 

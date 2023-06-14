@@ -39,10 +39,12 @@
 //koopa paratroopa
 #define PARATROOPA_STATE_FLY_UP 700
 #define PARATROOPA_STATE_FLY_DOWN 701
+#define PARATROOPA_STATE_ON_PLATFORM 702
 
 #define PARATROOPA_FLY_TIMEOUT 700
+#define PARATROOPA_WAIT_TIMEOUT 250
 
-#define PARATROOPA_FLY_UP_SPEED 0.08f
+#define PARATROOPA_FLY_UP_SPEED 0.06f
 
 
 #define ID_ANI_PARATROOPA_FLY_LEFT 6100
@@ -79,7 +81,7 @@ public:
 class CParaTroopa : public CKoopa
 {
 protected:	
-	ULONGLONG fly_start;
+	ULONGLONG fly_start, wait_start;
 	bool go_left;
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();	
