@@ -349,9 +349,7 @@ void CPlayScene::Update(DWORD dt)
 					objects.insert(objects.begin() + i, new CMushroom(x, y - BRICK_BBOX_HEIGHT / 2));				
 				else
 					objects.insert(objects.begin() + i, new CBouncingCoin(x, y - BRICK_BBOX_HEIGHT / 2));
-			}
-			
-
+			}			
 		}
 		
 	}

@@ -75,8 +75,17 @@ void CVenusFireTrap::GetBoundingBox(float& l, float& t, float& r, float& b)
 
 void CVenusFireTrap::Render()
 {
+	int aniID = ID_ANI_RED_VENUS_RISING;
+	if (state == VENUS_STATE_IDLE) {
+		if (mario_on_left_side) {
+			aniID = ID_ANI_RED_VENUS_LOOK_DOWN_LEFT;
+		}
+		else {
+			aniID = ID_ANI_RED_VENUS_LOOK_DOWN_RIGHT;
+		}
+	}
 	CAnimations* animations = CAnimations::GetInstance();
-	animations->Get(ID_ANI_RED_VENUS_RISING)->Render(x, y);
+	animations->Get(aniID)->Render(x, y);
 }
 
 void CVenusFireTrap::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)

@@ -80,11 +80,12 @@ public:
 class CVenusFireTrap : public CPiranha {
 protected:
 	ULONGLONG idle_start;
+	bool mario_on_left_side;
 public:
 	CVenusFireTrap(float x, float y) : CPiranha(x, y) {
 		idle_start = -1;
 		speed = VENUS_SPEED;
-
+		mario_on_left_side = true;
 	};
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 	void Render();
