@@ -192,6 +192,7 @@
     <Image Include="textures\bbox.png" />
     <Image Include="textures\enemies-4.png" />
     <Image Include="textures\enemies.png" />
+    <Image Include="textures\enemies2_nobg.png" />
     <Image Include="textures\enemies_flipped.png" />
     <Image Include="textures\enemies_recolored.png" />
     <Image Include="textures\enemies_recolored_flipped.png" />

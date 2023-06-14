@@ -64,3 +64,17 @@ void CPiranha::SetState(int state)
 		break;
 	}
 }
+
+void CVenusFireTrap::GetBoundingBox(float& l, float& t, float& r, float& b)
+{
+	l = x - VENUS_BBOX_WIDTH / 2;
+	t = y - VENUS_BBOX_HEIGHT / 2;
+	r = l + VENUS_BBOX_WIDTH;
+	b = t + VENUS_BBOX_HEIGHT;
+}
+
+void CVenusFireTrap::Render()
+{
+	CAnimations* animations = CAnimations::GetInstance();
+	animations->Get(ID_ANI_RED_VENUS_RISING)->Render(x, y);
+}

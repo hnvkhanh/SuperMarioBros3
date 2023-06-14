@@ -20,6 +20,31 @@
 #define PIRANHA_TIMEOUT 1150
 #define PIRANHA_WAIT_TIMEOUT 3000
 
+// venus fire trap
+
+#define ID_ANI_GREEN_VENUS_LOOK_DOWN_LEFT 81001
+#define ID_ANI_GREEN_VENUS_LOOK_UP_LEFT 81002
+#define ID_ANI_GREEN_VENUS_LOOK_DOWN_RIGHT 81003
+#define ID_ANI_GREEN_VENUS_LOOK_UP_RIGHT 81004
+#define ID_ANI_GREEN_VENUS_RISING 81005
+
+#define ID_ANI_RED_VENUS_LOOK_DOWN_LEFT 82001
+#define ID_ANI_RED_VENUS_LOOK_UP_LEFT 82002
+#define ID_ANI_RED_VENUS_LOOK_DOWN_RIGHT 82003
+#define ID_ANI_RED_VENUS_LOOK_UP_RIGHT 82004
+#define ID_ANI_RED_VENUS_RISING 82005
+
+#define VENUS_WIDTH 16
+#define VENUS_BBOX_WIDTH 16
+#define VENUS_BBOX_HEIGHT 32
+
+#define VENUS_STATE_IDLE 103
+#define VENUS_STATE_FIRE 104
+
+#define VENUS_SPEED 0.025f
+
+#define VENUS_IDLE_TIMEOUT 3000
+
 
 
 class CPiranha : public CGameObject
@@ -49,5 +74,19 @@ public:
 	void ResetPosition() {
 		y = y_fixed;
 	}
+};
+
+class CVenusFireTrap : public CPiranha {
+protected:
+	ULONGLONG idle_start;
+public:
+	CVenusFireTrap(float x, float y) : CPiranha(x, y) {
+		idle_start = -1;
+
+	};
+	void GetBoundingBox(float& l, float& t, float& r, float& b);
+	void Render();
+	/*void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
+	virtual void SetState(int state);*/	
 };
 

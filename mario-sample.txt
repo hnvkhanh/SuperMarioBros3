@@ -22,6 +22,7 @@ height	240
 14	textures\enemies_recolored_rotated.png
 15	textures\enemies-4.png
 16	textures\enemies_recolored_flipped.png
+17	textures\enemies2_nobg.png
 20	textures\misc.png
 30	textures\mis0_transparent.png
 40	textures\misc2.png

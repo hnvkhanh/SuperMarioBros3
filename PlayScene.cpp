@@ -217,7 +217,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			objects.push_back(new CPiranha(x + PIRANHA_BBOX_WIDTH / 2, y + PIRANHA_BBOX_HEIGHT/2));
 		else if (plant_type == 1)
 		{
-			//add venus fire trap 
+			objects.push_back(new CVenusFireTrap(x + VENUS_BBOX_WIDTH / 2, y + VENUS_BBOX_HEIGHT / 2));
 		}
 
 		obj = new CPipe(

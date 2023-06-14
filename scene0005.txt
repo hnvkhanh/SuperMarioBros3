@@ -35,7 +35,7 @@ pipe-rectangle.txt
 
 #koopa paratroopa
 #id	x	y	color(0-red, others-green)
-15	430	10	0
+15	430	10	1
 
 
 #Goomba
@@ -47,7 +47,7 @@ pipe-rectangle.txt
 #Pipe
 #id	x	y	w	h	height	id1	id2	id3 id4 plant_type
 # 0 - piranha, 1 - venus fire trap, other - None
-9	10	150	15	15	3	45001	45002	45101	45102	0
+9	10	165	15	15	3	45001	45002	45101	45102	1
 
 #prize block
 #id	x	y	type_of_prize
