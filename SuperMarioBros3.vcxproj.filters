@@ -220,5 +220,8 @@
     <Image Include="textures\enemies_recolored_flipped.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="textures\enemies-4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

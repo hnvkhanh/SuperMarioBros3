@@ -70,6 +70,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithParaGoomba(e);
 	else if (dynamic_cast<CGoomba*>(e->obj))
 		OnCollisionWithGoomba(e);
+	else if (dynamic_cast<CParaTroopa*>(e->obj))
+		OnCollisionWithParaTroopa(e);
 	else if (dynamic_cast<CKoopa*>(e->obj))
 		OnCollisionWithKoopa(e);
 	else if (dynamic_cast<CCoin*>(e->obj))
@@ -259,6 +261,29 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 				}					
 			}
 		}
+	}
+}
+
+void CMario::OnCollisionWithParaTroopa(LPCOLLISIONEVENT e)
+{
+	CParaTroopa* koopa = dynamic_cast<CParaTroopa*>(e->obj);
+
+	if (koopa->GetState() == PARATROOPA_STATE_FLY_DOWN && koopa->GetState() == PARATROOPA_STATE_FLY_UP) {
+		if (e->ny < 0)
+		{
+			if (koopa->GetGoLeft()) {
+				koopa->SetState(KOOPA_WALK_TO_LEFT);
+			}
+			else {
+				koopa->SetState(KOOPA_WALK_TO_RIGHT);
+			}
+		}
+		else {
+			OnCollisionWithKoopa(e);
+		}		
+	}
+	else {
+		OnCollisionWithKoopa(e);
 	}
 }
 

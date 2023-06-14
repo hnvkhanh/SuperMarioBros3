@@ -40,8 +40,7 @@ void CKoopa::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (!e->obj->IsBlocking()) {	
 		if (dynamic_cast<CParaGoomba*>(e->obj)
 			&& ((state == KOOPA_STATE_DIE_SLIDE_LEFT) || (state == KOOPA_STATE_DIE_SLIDE_RIGHT))) {
-			OnCollisionWithParaGoomba(e);
-			DebugOut(L"on collision with paragoomba\n");			
+			OnCollisionWithParaGoomba(e);					
 		}else if (dynamic_cast<CGoomba*>(e->obj)
 			&& ((state == KOOPA_STATE_DIE_SLIDE_LEFT) || (state == KOOPA_STATE_DIE_SLIDE_RIGHT))) {
 			OnCollisionWithGoomba(e);					
@@ -183,3 +182,125 @@ void CKoopa::SetState(int state)
 }
 
 
+// koopa paratroopa
+
+void CParaTroopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+{
+
+	if ((state == PARATROOPA_STATE_FLY_UP) && (GetTickCount64() - fly_start > PARATROOPA_FLY_TIMEOUT)) {
+		SetState(PARATROOPA_STATE_FLY_DOWN);
+	}
+
+	CKoopa::Update(dt, coObjects);
+
+	
+}
+
+void CParaTroopa::Render()
+{
+	int aniId = ID_ANI_KOOPA_DIE;
+	switch (state) {
+	case KOOPA_STATE_DIE:
+		aniId = ID_ANI_KOOPA_DIE;
+		break;
+
+	case KOOPA_WALK_TO_LEFT:
+		aniId = ID_ANI_KOOPA_WALKING_LEFT;
+		break;
+	case KOOPA_WALK_TO_RIGHT:
+		aniId = ID_ANI_KOOPA_WALKING_RIGHT;
+		break;
+	case KOOPA_STATE_DIE_SLIDE_LEFT:
+	case KOOPA_STATE_DIE_SLIDE_RIGHT:
+		aniId = ID_ANI_KOOPA_DIE_SLIDE;
+		break;
+	case KOOPA_STATE_REVIVE:
+		aniId = ID_ANI_KOOPA_REVIVE;
+		break;	
+	case PARATROOPA_STATE_FLY_UP:
+	case PARATROOPA_STATE_FLY_DOWN:
+		if (go_left) {
+			aniId = ID_ANI_PARATROOPA_FLY_LEFT;
+		}
+		else {
+			aniId = ID_ANI_PARATROOPA_FLY_RIGHT;
+		}
+		break;
+	}
+
+	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
+	/*RenderBoundingBox();*/
+}
+
+void CParaTroopa::OnCollisionWith(LPCOLLISIONEVENT e)
+{
+	if (!e->obj->IsBlocking()) {
+		if (dynamic_cast<CParaGoomba*>(e->obj)
+			&& ((state == KOOPA_STATE_DIE_SLIDE_LEFT) || (state == KOOPA_STATE_DIE_SLIDE_RIGHT))) {
+			OnCollisionWithParaGoomba(e);
+		}
+		else if (dynamic_cast<CGoomba*>(e->obj)
+			&& ((state == KOOPA_STATE_DIE_SLIDE_LEFT) || (state == KOOPA_STATE_DIE_SLIDE_RIGHT))) {
+			OnCollisionWithGoomba(e);
+		}
+		return;
+	}
+	if (state == PARATROOPA_STATE_FLY_UP || state == PARATROOPA_STATE_FLY_DOWN) {
+		if (e->ny < 0 && state == PARATROOPA_STATE_FLY_DOWN)
+		{
+			SetState(PARATROOPA_STATE_FLY_UP);
+		}
+		else if (e->ny > 0 && state == PARATROOPA_STATE_FLY_UP) {
+			SetState(PARATROOPA_STATE_FLY_DOWN);
+		}
+		else if (e->nx != 0)
+		{
+			vx = -vx;			
+		}
+	}
+	else {
+		if (e->ny != 0)
+		{
+			vy = 0;
+		}
+		else if (e->nx != 0)
+		{
+			vx = -vx;
+
+			if (state == KOOPA_WALK_TO_RIGHT) {
+				SetState(KOOPA_WALK_TO_LEFT);
+			}
+			else if (state == KOOPA_WALK_TO_LEFT) {
+				SetState(KOOPA_WALK_TO_RIGHT);
+			}
+		}
+	}
+	
+
+}
+
+CParaTroopa::CParaTroopa(float x, float y) : CKoopa(x, y)
+{
+	go_left = true;
+	fly_start = -1;
+	SetState(PARATROOPA_STATE_FLY_DOWN);
+}
+
+void CParaTroopa::SetState(int state)
+{
+	CKoopa::SetState(state);
+
+	switch (state)
+	{
+	case PARATROOPA_STATE_FLY_UP:
+		vy = -PARATROOPA_FLY_UP_SPEED;
+		ay = 0;		
+		fly_start = GetTickCount64();
+		break;
+	case PARATROOPA_STATE_FLY_DOWN:
+		vy = 0;
+		ay = KOOPA_GRAVITY;		
+		break;
+	}
+
+}

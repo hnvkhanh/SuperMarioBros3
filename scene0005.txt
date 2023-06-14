@@ -31,7 +31,9 @@ pipe-rectangle.txt
 
 #Koopa
 3	400	10
-3	430	10
+
+#koopa paratroopa
+15	430	10
 
 
 #Goomba
