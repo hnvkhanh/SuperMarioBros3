@@ -33,10 +33,15 @@
 #define ID_ANI_RED_VENUS_LOOK_DOWN_RIGHT 82003
 #define ID_ANI_RED_VENUS_LOOK_UP_RIGHT 82004
 #define ID_ANI_RED_VENUS_RISING 82005
+#define ID_ANI_FIREBALL 88888
 
 #define VENUS_WIDTH 16
 #define VENUS_BBOX_WIDTH 16
 #define VENUS_BBOX_HEIGHT 32
+
+#define FIREBALL_WIDTH 8
+#define FIREBALL_BBOX_WIDTH 8
+#define FIREBALL_BBOX_HEIGHT 8
 
 #define VENUS_STATE_IDLE 103
 #define VENUS_STATE_FIRE 104
@@ -44,6 +49,7 @@
 #define VENUS_SPEED 0.03f
 
 #define VENUS_IDLE_TIMEOUT 3000
+#define VENUS_FIRE_TIMEOUT 1000
 
 
 
@@ -81,14 +87,16 @@ public:
 
 class CVenusFireTrap : public CPiranha {
 protected:
-	ULONGLONG idle_start;
+	ULONGLONG idle_start, fire_start;
 	float x_mario, y_mario;
+	bool fire_ball_added;
 public:
 	CVenusFireTrap(float x, float y) : CPiranha(x, y) {
 		idle_start = -1;
 		speed = VENUS_SPEED;
 		x_mario = 0;
 		y_mario = 0;
+		fire_ball_added = false;
 	};
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 	void Render();
@@ -97,5 +105,18 @@ public:
 	void GetMarioPosition(float x, float y);
 	bool IsMarioOnLeft();
 	bool IsMarioHigher();
+	void SetFireBallAdded();
+	bool IsFireBallAdded();
+};
+
+
+class CFireBall : public CGameObject {
+public:	
+	CFireBall(float x, float y, float x_mario, float y_mario);
+	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
+	void GetBoundingBox(float& l, float& t, float& r, float& b);
+	void Render();	
+	virtual int IsCollidable() { return 1; };
+	virtual int IsBlocking() { return 0; }
 };
 

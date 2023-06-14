@@ -197,8 +197,7 @@ void CParaGoomba::OnCollisionWith(LPCOLLISIONEVENT e)
 	{
 		if (state != GOOMBA_HIT_BY_KOOPA) {
 			vy = 0;
-			if (e->ny < 0) {
-				DebugOut(L"set on platform\n");
+			if (e->ny < 0) {				
 				on_platform = true;
 			}
 			

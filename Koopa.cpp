@@ -72,8 +72,7 @@ void CKoopa::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 	CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
 
 	if (goomba->GetState() != GOOMBA_STATE_DIE) {
-		goomba->SetState(GOOMBA_HIT_BY_KOOPA);
-		DebugOut(L"set state goomba");
+		goomba->SetState(GOOMBA_HIT_BY_KOOPA);		
 	}
 }
 
@@ -81,8 +80,7 @@ void CKoopa::OnCollisionWithParaGoomba(LPCOLLISIONEVENT e)
 {
 	CParaGoomba* paragoomba = dynamic_cast<CParaGoomba*>(e->obj);
 	if (paragoomba->GetState() == PARAGOOMBA_STATE_WING_FLYING || paragoomba->GetState() == PARAGOOMBA_STATE_WING_WALKING) {
-		paragoomba->SetState(GOOMBA_STATE_WALKING);
-		DebugOut(L"change to state walking\n");
+		paragoomba->SetState(GOOMBA_STATE_WALKING);		
 	}
 	else if (paragoomba->GetState() != GOOMBA_STATE_DIE) {
 		paragoomba->SetState(GOOMBA_HIT_BY_KOOPA);		
@@ -311,8 +309,7 @@ void CParaTroopa::OnCollisionWith(LPCOLLISIONEVENT e)
 		if (e->ny < 0 && state == PARATROOPA_STATE_FLY_DOWN)
 		{
 			if (GetTickCount64() - wait_start > PARATROOPA_WAIT_TIMEOUT) {
-				wait_start = -1;
-				DebugOut(L"finish wait\n");
+				wait_start = -1;				
 				SetState(PARATROOPA_STATE_FLY_UP);
 			}
 			else {

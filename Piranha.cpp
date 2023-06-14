@@ -1,4 +1,5 @@
 #include "Piranha.h"
+#include "Game.h"
 
 void CPiranha::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
@@ -104,7 +105,12 @@ void CVenusFireTrap::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	
 	if ((state == VENUS_STATE_IDLE) && (GetTickCount64() - idle_start > VENUS_IDLE_TIMEOUT))
 	{		
+		SetState(VENUS_STATE_FIRE);		
+	}
+	else if ((state == VENUS_STATE_FIRE) && (GetTickCount64() - fire_start > VENUS_FIRE_TIMEOUT))
+	{
 		SetState(PIRANHA_STATE_DOWN);
+		fire_ball_added = true;
 	}
 	else if ((state == PIRANHA_STATE_UP) && (GetTickCount64() - up_start > PIRANHA_TIMEOUT))
 	{		
@@ -123,6 +129,10 @@ void CVenusFireTrap::SetState(int state)
 		vy = 0;
 		idle_start = GetTickCount64();
 		break;	
+	case VENUS_STATE_FIRE:
+		fire_start = GetTickCount64();	
+		fire_ball_added = true;
+		break;
 	}
 }
 
@@ -147,4 +157,43 @@ bool CVenusFireTrap::IsMarioHigher()
 		return false;
 	else
 		return true;
+}
+
+void CVenusFireTrap::SetFireBallAdded()
+{
+	fire_ball_added = true;
+}
+
+bool CVenusFireTrap::IsFireBallAdded()
+{
+	return fire_ball_added;
+}
+
+CFireBall::CFireBall(float x, float y, float x_mario, float y_mario) : CGameObject(x, y)
+{
+	vx = (y_mario - y) / (x_mario - x);
+	vy = y - vx * x;
+}
+
+void CFireBall::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+{
+	y += vy * dt;
+	x += vx * dt;
+
+	CGameObject::Update(dt, coObjects);
+	CCollision::GetInstance()->Process(this, dt, coObjects);
+}
+
+void CFireBall::GetBoundingBox(float& l, float& t, float& r, float& b)
+{
+	l = x - FIREBALL_BBOX_WIDTH / 2;
+	t = y - FIREBALL_BBOX_HEIGHT / 2;
+	r = l + FIREBALL_BBOX_WIDTH;
+	b = t + FIREBALL_BBOX_HEIGHT;
+}
+
+void CFireBall::Render()
+{
+	CAnimations* animations = CAnimations::GetInstance();
+	animations->Get(ID_ANI_FIREBALL)->Render(x, y);
 }
