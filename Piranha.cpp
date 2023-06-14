@@ -47,12 +47,12 @@ void CPiranha::SetState(int state)
 	switch (state)
 	{
 	case  PIRANHA_STATE_UP:		
-		vy = -PIRANHA_SPEED;	
+		vy = -speed;	
 		wait_start = -1;
 		up_start = GetTickCount64();
 		break;
 	case  PIRANHA_STATE_DOWN:
-		vy = PIRANHA_SPEED;		
+		vy = speed;
 		wait_start = -1;
 		up_start = GetTickCount64();
 		break;
@@ -77,4 +77,9 @@ void CVenusFireTrap::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
 	animations->Get(ID_ANI_RED_VENUS_RISING)->Render(x, y);
+}
+
+void CVenusFireTrap::SetState(int state)
+{
+	CPiranha::SetState(state);	
 }

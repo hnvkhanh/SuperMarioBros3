@@ -220,6 +220,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			objects.push_back(new CVenusFireTrap(x + VENUS_BBOX_WIDTH / 2, y + VENUS_BBOX_HEIGHT / 2));
 		}
 
+		DebugOut(L"pipe height = %d\n", length);
+
 		obj = new CPipe(
 			x, y,
 			cell_width, cell_height, length,

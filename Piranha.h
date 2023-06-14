@@ -41,7 +41,7 @@
 #define VENUS_STATE_IDLE 103
 #define VENUS_STATE_FIRE 104
 
-#define VENUS_SPEED 0.025f
+#define VENUS_SPEED 0.03f
 
 #define VENUS_IDLE_TIMEOUT 3000
 
@@ -53,13 +53,14 @@ protected:
 	virtual void OnNoCollision(DWORD dt) { return; };
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e) { return; };
 	ULONGLONG up_start, wait_start;		
-	float y_fixed;
+	float y_fixed, speed;
 public:
 	CPiranha(float x, float y) : CGameObject(x, y) {
 		up_start = -1;
 		wait_start = -1;		
 		SetState(PIRANHA_STATE_WAIT);
 		y_fixed = y;
+		speed = PIRANHA_SPEED;
 		
 	};
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
@@ -82,11 +83,12 @@ protected:
 public:
 	CVenusFireTrap(float x, float y) : CPiranha(x, y) {
 		idle_start = -1;
+		speed = VENUS_SPEED;
 
 	};
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 	void Render();
-	/*void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
-	virtual void SetState(int state);*/	
+	/*void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);*/
+	virtual void SetState(int state);
 };
 
