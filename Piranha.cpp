@@ -79,7 +79,29 @@ void CVenusFireTrap::Render()
 	animations->Get(ID_ANI_RED_VENUS_RISING)->Render(x, y);
 }
 
+void CVenusFireTrap::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+{
+	
+	if ((state == VENUS_STATE_IDLE) && (GetTickCount64() - idle_start > VENUS_IDLE_TIMEOUT))
+	{		
+		SetState(PIRANHA_STATE_DOWN);
+	}
+	else if ((state == PIRANHA_STATE_UP) && (GetTickCount64() - up_start > PIRANHA_TIMEOUT))
+	{		
+		SetState(VENUS_STATE_IDLE);
+	}
+
+	CPiranha::Update(dt, coObjects);
+}
+
 void CVenusFireTrap::SetState(int state)
 {
 	CPiranha::SetState(state);	
+	switch (state)
+	{
+	case  VENUS_STATE_IDLE:
+		vy = 0;
+		idle_start = GetTickCount64();
+		break;	
+	}
 }
