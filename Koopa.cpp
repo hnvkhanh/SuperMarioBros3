@@ -263,7 +263,8 @@ void CParaTroopa::OnCollisionWith(LPCOLLISIONEVENT e)
 		}
 		else if (e->nx != 0)
 		{
-			vx = -vx;			
+			vx = -vx;		
+			go_left = !go_left;
 		}
 	}
 	else {
