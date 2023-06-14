@@ -195,6 +195,7 @@
     <Image Include="textures\enemies_flipped.png" />
     <Image Include="textures\enemies_recolored.png" />
     <Image Include="textures\enemies_recolored_flipped.png" />
+    <Image Include="textures\enemies_recolored_rotated.png" />
     <Image Include="textures\enemies_rotated.png" />
     <Image Include="textures\mario.png" />
     <Image Include="textures\mis0_transparent.png" />

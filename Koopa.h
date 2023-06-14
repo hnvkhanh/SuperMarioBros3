@@ -15,7 +15,7 @@
 #define KOOPA_SLIDING_SPEED 0.2f
 
 
-#define KOOPA_BBOX_WIDTH 18
+#define KOOPA_BBOX_WIDTH 16
 #define KOOPA_BBOX_HEIGHT 26
 #define KOOPA_BBOX_HEIGHT_DIE 16
 
@@ -30,11 +30,16 @@
 #define KOOPA_STATE_DIE_SLIDE_RIGHT 501
 #define KOOPA_STATE_REVIVE 600
 
-#define ID_ANI_KOOPA_WALKING_LEFT 6000
-#define ID_ANI_KOOPA_WALKING_RIGHT 6001
-#define ID_ANI_KOOPA_DIE 6002
-#define ID_ANI_KOOPA_DIE_SLIDE 6003
-#define ID_ANI_KOOPA_REVIVE 6004
+#define ID_ANI_RED_KOOPA_WALKING_LEFT 6000
+#define ID_ANI_RED_KOOPA_WALKING_RIGHT 6001
+#define ID_ANI_RED_KOOPA_DIE 6002
+#define ID_ANI_RED_KOOPA_DIE_SLIDE 6003
+#define ID_ANI_RED_KOOPA_REVIVE 6004
+#define ID_ANI_GREEN_KOOPA_WALKING_LEFT 6005
+#define ID_ANI_GREEN_KOOPA_WALKING_RIGHT 6006
+#define ID_ANI_GREEN_KOOPA_DIE 6007
+#define ID_ANI_GREEN_KOOPA_DIE_SLIDE 6008
+#define ID_ANI_GREEN_KOOPA_REVIVE 6009
 
 //koopa paratroopa
 #define PARATROOPA_STATE_FLY_UP 700
@@ -47,8 +52,11 @@
 #define PARATROOPA_FLY_UP_SPEED 0.06f
 
 
-#define ID_ANI_PARATROOPA_FLY_LEFT 6100
-#define ID_ANI_PARATROOPA_FLY_RIGHT 6101
+#define ID_ANI_GREEN_PARATROOPA_FLY_LEFT 6100
+#define ID_ANI_GREEN_PARATROOPA_FLY_RIGHT 6101
+
+#define ID_ANI_RED_PARATROOPA_FLY_LEFT 6102
+#define ID_ANI_RED_PARATROOPA_FLY_RIGHT 6103
 
 
 class CKoopa : public CGameObject
@@ -56,7 +64,7 @@ class CKoopa : public CGameObject
 protected:
 	float ax;
 	float ay;
-
+	int color;
 	ULONGLONG die_start;
 	ULONGLONG revive_start;
 
@@ -73,7 +81,7 @@ protected:
 	virtual void OnCollisionWithParaGoomba(LPCOLLISIONEVENT e);
 
 public:
-	CKoopa(float x, float y);
+	CKoopa(float x, float y, int c);
 	virtual void SetState(int state);
 };
 
@@ -88,7 +96,7 @@ protected:
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);		
 
 public:
-	CParaTroopa(float x, float y);
+	CParaTroopa(float x, float y, int c);
 	bool GetGoLeft() { return go_left; };
 	virtual void SetState(int state);
 };

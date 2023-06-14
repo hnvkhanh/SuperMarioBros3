@@ -30,10 +30,12 @@ pipe-rectangle.txt
 0	100	100
 
 #Koopa
-3	400	10
+#id	x	y	color(0-red, others-green)
+3	400	10	0
 
 #koopa paratroopa
-15	430	10
+#id	x	y	color(0-red, others-green)
+15	430	10	0
 
 
 #Goomba

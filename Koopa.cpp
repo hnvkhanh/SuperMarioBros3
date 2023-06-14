@@ -2,8 +2,9 @@
 
 #include "debug.h"
 
-CKoopa::CKoopa(float x, float y) :CGameObject(x, y)
-{
+CKoopa::CKoopa(float x, float y, int c) :CGameObject(x, y)
+{	
+	this->color = c;
 	this->ax = 0;
 	this->ay = KOOPA_GRAVITY;
 	die_start = -1;
@@ -109,26 +110,52 @@ void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CKoopa::Render()
 {
-	int aniId = ID_ANI_KOOPA_DIE;
-	switch (state) {
-	case KOOPA_STATE_DIE:
-		aniId = ID_ANI_KOOPA_DIE;
-		break;
+	int aniId;
+	if (color == 0) {
+		aniId = ID_ANI_RED_KOOPA_DIE;
+		switch (state) {
+		case KOOPA_STATE_DIE:
+			aniId = ID_ANI_RED_KOOPA_DIE;
+			break;
 
-	case KOOPA_WALK_TO_LEFT:
-		aniId = ID_ANI_KOOPA_WALKING_LEFT;
-		break;
-	case KOOPA_WALK_TO_RIGHT:
-		aniId = ID_ANI_KOOPA_WALKING_RIGHT;
-		break;
-	case KOOPA_STATE_DIE_SLIDE_LEFT:
-	case KOOPA_STATE_DIE_SLIDE_RIGHT:
-		aniId = ID_ANI_KOOPA_DIE_SLIDE;
-		break;
-	case KOOPA_STATE_REVIVE:
-		aniId = ID_ANI_KOOPA_REVIVE;
-		break;
+		case KOOPA_WALK_TO_LEFT:
+			aniId = ID_ANI_RED_KOOPA_WALKING_LEFT;
+			break;
+		case KOOPA_WALK_TO_RIGHT:
+			aniId = ID_ANI_RED_KOOPA_WALKING_RIGHT;
+			break;
+		case KOOPA_STATE_DIE_SLIDE_LEFT:
+		case KOOPA_STATE_DIE_SLIDE_RIGHT:
+			aniId = ID_ANI_RED_KOOPA_DIE_SLIDE;
+			break;
+		case KOOPA_STATE_REVIVE:
+			aniId = ID_ANI_RED_KOOPA_REVIVE;
+			break;
+		}
 	}
+	else {
+		aniId = ID_ANI_GREEN_KOOPA_DIE;
+		switch (state) {
+		case KOOPA_STATE_DIE:
+			aniId = ID_ANI_GREEN_KOOPA_DIE;
+			break;
+
+		case KOOPA_WALK_TO_LEFT:
+			aniId = ID_ANI_GREEN_KOOPA_WALKING_LEFT;
+			break;
+		case KOOPA_WALK_TO_RIGHT:
+			aniId = ID_ANI_GREEN_KOOPA_WALKING_RIGHT;
+			break;
+		case KOOPA_STATE_DIE_SLIDE_LEFT:
+		case KOOPA_STATE_DIE_SLIDE_RIGHT:
+			aniId = ID_ANI_GREEN_KOOPA_DIE_SLIDE;
+			break;
+		case KOOPA_STATE_REVIVE:
+			aniId = ID_ANI_GREEN_KOOPA_REVIVE;
+			break;
+		}
+	}
+	
 	
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
@@ -198,35 +225,70 @@ void CParaTroopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CParaTroopa::Render()
 {
-	int aniId = ID_ANI_KOOPA_DIE;
-	switch (state) {
-	case KOOPA_STATE_DIE:
-		aniId = ID_ANI_KOOPA_DIE;
-		break;
+	int aniId;
+	if (color == 0) {
+		aniId = ID_ANI_RED_KOOPA_DIE;
+		switch (state) {
+		case KOOPA_STATE_DIE:
+			aniId = ID_ANI_RED_KOOPA_DIE;
+			break;
 
-	case KOOPA_WALK_TO_LEFT:
-		aniId = ID_ANI_KOOPA_WALKING_LEFT;
-		break;
-	case KOOPA_WALK_TO_RIGHT:
-		aniId = ID_ANI_KOOPA_WALKING_RIGHT;
-		break;
-	case KOOPA_STATE_DIE_SLIDE_LEFT:
-	case KOOPA_STATE_DIE_SLIDE_RIGHT:
-		aniId = ID_ANI_KOOPA_DIE_SLIDE;
-		break;
-	case KOOPA_STATE_REVIVE:
-		aniId = ID_ANI_KOOPA_REVIVE;
-		break;	
-	case PARATROOPA_STATE_FLY_UP:
-	case PARATROOPA_STATE_FLY_DOWN:
-		if (go_left) {
-			aniId = ID_ANI_PARATROOPA_FLY_LEFT;
+		case KOOPA_WALK_TO_LEFT:
+			aniId = ID_ANI_RED_KOOPA_WALKING_LEFT;
+			break;
+		case KOOPA_WALK_TO_RIGHT:
+			aniId = ID_ANI_RED_KOOPA_WALKING_RIGHT;
+			break;
+		case KOOPA_STATE_DIE_SLIDE_LEFT:
+		case KOOPA_STATE_DIE_SLIDE_RIGHT:
+			aniId = ID_ANI_RED_KOOPA_DIE_SLIDE;
+			break;
+		case KOOPA_STATE_REVIVE:
+			aniId = ID_ANI_RED_KOOPA_REVIVE;
+			break;
+		case PARATROOPA_STATE_FLY_UP:
+		case PARATROOPA_STATE_FLY_DOWN:
+			if (go_left) {
+				aniId = ID_ANI_RED_PARATROOPA_FLY_LEFT;
+			}
+			else {
+				aniId = ID_ANI_RED_PARATROOPA_FLY_RIGHT;
+			}
+			break;
 		}
-		else {
-			aniId = ID_ANI_PARATROOPA_FLY_RIGHT;
-		}
-		break;
 	}
+	else {
+		aniId = ID_ANI_GREEN_KOOPA_DIE;
+		switch (state) {
+		case KOOPA_STATE_DIE:
+			aniId = ID_ANI_GREEN_KOOPA_DIE;
+			break;
+
+		case KOOPA_WALK_TO_LEFT:
+			aniId = ID_ANI_GREEN_KOOPA_WALKING_LEFT;
+			break;
+		case KOOPA_WALK_TO_RIGHT:
+			aniId = ID_ANI_GREEN_KOOPA_WALKING_RIGHT;
+			break;
+		case KOOPA_STATE_DIE_SLIDE_LEFT:
+		case KOOPA_STATE_DIE_SLIDE_RIGHT:
+			aniId = ID_ANI_GREEN_KOOPA_DIE_SLIDE;
+			break;
+		case KOOPA_STATE_REVIVE:
+			aniId = ID_ANI_GREEN_KOOPA_REVIVE;
+			break;
+		case PARATROOPA_STATE_FLY_UP:
+		case PARATROOPA_STATE_FLY_DOWN:
+			if (go_left) {
+				aniId = ID_ANI_GREEN_PARATROOPA_FLY_LEFT;
+			}
+			else {
+				aniId = ID_ANI_GREEN_PARATROOPA_FLY_RIGHT;
+			}
+			break;
+		}
+	}
+	
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 	/*RenderBoundingBox();*/
@@ -288,7 +350,7 @@ void CParaTroopa::OnCollisionWith(LPCOLLISIONEVENT e)
 
 }
 
-CParaTroopa::CParaTroopa(float x, float y) : CKoopa(x, y)
+CParaTroopa::CParaTroopa(float x, float y, int c) : CKoopa(x, y, c)
 {
 	go_left = true;
 	fly_start = -1;
