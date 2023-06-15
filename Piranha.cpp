@@ -73,7 +73,10 @@ void CVenusFireTrap::GetBoundingBox(float& l, float& t, float& r, float& b)
 
 void CVenusFireTrap::Render()
 {
-	int aniID = ID_ANI_RED_VENUS_RISING;
+	int aniID = ID_ANI_RED_VENUS_RISING_RIGHT;
+	if (IsMarioOnLeft()) {
+		aniID = ID_ANI_RED_VENUS_RISING_LEFT;
+	}
 	if (state == VENUS_STATE_IDLE) {
 		if (IsMarioHigher()) {
 			if (IsMarioOnLeft()) {
@@ -165,6 +168,9 @@ int CVenusFireTrap::GetFireBall()
 {
 	return fire_ball_added;
 }
+
+
+//fire balls
 
 CFireBall::CFireBall(float x, float y, float x_mario, float y_mario) : CGameObject(x, y)
 {	
