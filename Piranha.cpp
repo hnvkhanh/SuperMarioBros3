@@ -167,16 +167,18 @@ int CVenusFireTrap::GetFireBall()
 }
 
 CFireBall::CFireBall(float x, float y, float x_mario, float y_mario) : CGameObject(x, y)
-{
-	vx = (y_mario - y) / (x_mario - x);
-	vy = y - vx * x;
-	DebugOut(L"vx = %f\n", vx);
-	/*vx = 0.01f;
-	vy = 0.01f;*/
+{	
+	if (x < x_mario) {
+		vx = 0.05f;
+	}
+	else {
+		vx = -0.05f;
+	}
+	vy = (y_mario - y) / (x_mario - x) * vx;
 }
 
 void CFireBall::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
-{
+{	
 	y += vy * dt;
 	x += vx * dt;
 
