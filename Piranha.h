@@ -18,7 +18,7 @@
 #define PIRANHA_SPEED 0.025f
 
 #define PIRANHA_TIMEOUT 1150
-#define PIRANHA_WAIT_TIMEOUT 3000
+#define PIRANHA_WAIT_TIMEOUT 1000
 
 // venus fire trap
 
@@ -49,7 +49,7 @@
 #define VENUS_SPEED 0.03f
 
 #define VENUS_IDLE_TIMEOUT 3000
-#define VENUS_FIRE_TIMEOUT 1000
+#define VENUS_FIRE_TIMEOUT 3000
 
 
 
@@ -89,14 +89,14 @@ class CVenusFireTrap : public CPiranha {
 protected:
 	ULONGLONG idle_start, fire_start;
 	float x_mario, y_mario;
-	bool fire_ball_added;
+	int fire_ball_added;
 public:
 	CVenusFireTrap(float x, float y) : CPiranha(x, y) {
 		idle_start = -1;
 		speed = VENUS_SPEED;
 		x_mario = 0;
 		y_mario = 0;
-		fire_ball_added = false;
+		fire_ball_added = 0;
 	};
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 	void Render();
@@ -105,8 +105,8 @@ public:
 	void GetMarioPosition(float x, float y);
 	bool IsMarioOnLeft();
 	bool IsMarioHigher();
-	void SetFireBallAdded();
-	bool IsFireBallAdded();
+	void IncreaseFireBall();
+	int GetFireBall();
 };
 
 

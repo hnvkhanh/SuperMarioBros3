@@ -23,18 +23,15 @@ void CPiranha::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	
 
 	if ((state == PIRANHA_STATE_UP) && (GetTickCount64() - up_start > PIRANHA_TIMEOUT))
-	{
-		DebugOut(L"piranha go down\n");
+	{	
 		SetState(PIRANHA_STATE_DOWN);
 	} 
 	else if ((state == PIRANHA_STATE_DOWN) && (GetTickCount64() - up_start > PIRANHA_TIMEOUT))
-	{
-		DebugOut(L"piranha go up\n");
+	{		
 		SetState(PIRANHA_STATE_WAIT);
 	}
 	else if ((state == PIRANHA_STATE_WAIT) && (GetTickCount64() - wait_start > PIRANHA_WAIT_TIMEOUT))
-	{
-		DebugOut(L"piranha go up\n");
+	{		
 		SetState(PIRANHA_STATE_UP);
 	}
 
@@ -105,16 +102,16 @@ void CVenusFireTrap::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	
 	if ((state == VENUS_STATE_IDLE) && (GetTickCount64() - idle_start > VENUS_IDLE_TIMEOUT))
 	{		
-		SetState(VENUS_STATE_FIRE);		
+		SetState(VENUS_STATE_FIRE);				
 	}
 	else if ((state == VENUS_STATE_FIRE) && (GetTickCount64() - fire_start > VENUS_FIRE_TIMEOUT))
 	{
-		SetState(PIRANHA_STATE_DOWN);
-		fire_ball_added = true;
+		SetState(PIRANHA_STATE_DOWN);			
 	}
 	else if ((state == PIRANHA_STATE_UP) && (GetTickCount64() - up_start > PIRANHA_TIMEOUT))
 	{		
 		SetState(VENUS_STATE_IDLE);
+		fire_ball_added = 0;
 	}
 
 	CPiranha::Update(dt, coObjects);
@@ -131,7 +128,7 @@ void CVenusFireTrap::SetState(int state)
 		break;	
 	case VENUS_STATE_FIRE:
 		fire_start = GetTickCount64();	
-		fire_ball_added = true;
+		fire_ball_added = 0;
 		break;
 	}
 }
@@ -159,12 +156,12 @@ bool CVenusFireTrap::IsMarioHigher()
 		return true;
 }
 
-void CVenusFireTrap::SetFireBallAdded()
+void CVenusFireTrap::IncreaseFireBall()
 {
-	fire_ball_added = true;
+	fire_ball_added += 1;
 }
 
-bool CVenusFireTrap::IsFireBallAdded()
+int CVenusFireTrap::GetFireBall()
 {
 	return fire_ball_added;
 }
@@ -173,6 +170,9 @@ CFireBall::CFireBall(float x, float y, float x_mario, float y_mario) : CGameObje
 {
 	vx = (y_mario - y) / (x_mario - x);
 	vy = y - vx * x;
+	DebugOut(L"vx = %f\n", vx);
+	/*vx = 0.01f;
+	vy = 0.01f;*/
 }
 
 void CFireBall::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)

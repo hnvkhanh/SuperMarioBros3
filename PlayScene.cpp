@@ -357,11 +357,12 @@ void CPlayScene::Update(DWORD dt)
 		}
 		else if (dynamic_cast<CVenusFireTrap*>(objects[i])) {
 			CVenusFireTrap* venus = dynamic_cast<CVenusFireTrap*>(objects[i]);
-			venus->GetMarioPosition(x_mario, y_mario);
-			float x, y;
-			venus->GetPosition(x, y);
-			if (venus->GetState() == VENUS_STATE_FIRE && !venus->IsFireBallAdded()) {
-				objects.insert(objects.begin() + i, new CFireBall(x, y, x_mario, y_mario));				
+			venus->GetMarioPosition(x_mario, y_mario);			
+			if (venus->GetState() == VENUS_STATE_FIRE && venus->GetFireBall() == 0) {
+				float x, y;
+				venus->IncreaseFireBall();
+				venus->GetPosition(x, y);
+				objects.insert(objects.begin() + i, new CFireBall(x -10, y-10, x_mario, y_mario));				
 				DebugOut(L"add fireball\n");
 			}
 		}
