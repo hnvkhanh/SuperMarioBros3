@@ -1,73 +1,71 @@
 # list of object assets to load in this scene
 [ASSETS]
 mario.txt
-brick.txt
 coin.txt
-goomba.txt
 cloud.txt
-koopa.txt
+brick.txt
 bush.txt
+koopa.txt
+goomba.txt
 semiwood.txt
+background-cloud.txt
+pipe-rectangle.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
 # type: 0 = Mario , 1 = Brick, 2 = Goomba, 3 = Koopas
 # See OBJECT_TYPE constants in AssetIDs.h
 
-#Bush
-6	100	100
+#Rectangle
+#id	x	y	cell_w	cell_h	width	height	id_top_1	id_top_2	id_top_3
+#white
+8	512	84	15	15	5	8	46031	46032	46033	46034	46035	46036	46037	46038	46039
+#blu
+8	272	116	15	15	3	5	46011	46012	46013	46014	46015	46016	46017	46018	46019
+#pink
+8	240	148	15	15	3	3	46001	46002	46003	46004	46005	46006	46007	46008	46009
+8	464	116	15	15	4	5	46001	46002	46003	46004	46005	46006	46007	46008	46009
+#green
+8	400	148	15	15	5	3	46021	46022	46023	46024	46025	46026	46027	46028	46029
+8	512	164	15	15	6	2	46021	46022	46023	46024	46025	46026	46027	46028	46029
+
+
 
 # MARIO
-0	20	10
+0	100	100
 
-# BRICKS
-1	0	148
-1	0	164
+#prize block
+#id	x	y	type_of_prize
+#1 for mushroom
+#other for coin
+10	176	132	0
+10	192	132	0
+10	224	84	0
+10	240	84	1
+10	656	164	1
+10	416	100	0
+10	704	132	0
 
-1	0	180
-1	16	180
-1	32	180
-1	48	180
-1	64	180
-1	80	180
-1	96	180
-1	112	180
-1	128	180
-1	144	180
-1	160	180
-1	176	180
-1	192	180
-1	208	180
-1	224	180
-1	240	180
-1	256	180
-1	272	180
-1	288	180
-1	304	180
-1	320	180
-1	336	180
-1	352	180
 
-1	352	148
-1	352	164
+#Goomba x	y	type(normal = 1, Red: 2) level(normal: 1, wing: 2)
+2	224	160
+2	528	160
+2	832	165
+2	880	165
 
-#COIN
-4	100	120
-4	120	120
-4	140	120
-4	160	120
-4	180	120
+#Paragoomba
+14	944	162
 
-#Goomba
-2	300	10
+#Koopa
+#id	x	y	color(0-red, others-green)
+3	577	139	0
 
-#Koopas
-3	250	10
-3	350	10
+#Pipe
+#id	x	y	w	h	height	id1	id2	id3 id4 plant_type
+# 0 - piranha, 1 - venus fire trap, other - None
+9	352	149	15	15	3	45001	45002	45101	45102	1
 
 
 #Platform
-5	90	136	16	15	16	51000	52000	53000
-
-#Portal 
-50	300	110	316	140	2
+#id	x	y	w	h	length	id1	id2	id3
+5 	0	195	15	15	100	61000	62000	63000
