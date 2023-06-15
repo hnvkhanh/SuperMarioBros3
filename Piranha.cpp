@@ -188,9 +188,10 @@ void CFireBall::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	y += vy * dt;
 	x += vx * dt;
 
-	if (x < 0 || y > 200 ) {
+	float cx, cy, cw, ch;
+	CGame::GetInstance()->GetCamPos(cx, cy);
+	if (x < cx || (x > cx + 320) || y < cy || (y > cy + 240))
 		this->Delete();
-	}
 
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
