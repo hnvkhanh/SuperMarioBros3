@@ -169,10 +169,10 @@ int CVenusFireTrap::GetFireBall()
 CFireBall::CFireBall(float x, float y, float x_mario, float y_mario) : CGameObject(x, y)
 {	
 	if (x < x_mario) {
-		vx = 0.05f;
+		vx = FIREBALL_SPEED;
 	}
 	else {
-		vx = -0.05f;
+		vx = -FIREBALL_SPEED;
 	}
 	vy = (y_mario - y) / (x_mario - x) * vx;
 }
