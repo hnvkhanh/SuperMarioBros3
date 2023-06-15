@@ -179,7 +179,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		int sprite_middle_bottom = atoi(tokens[14].c_str());
 		int sprite_end_bottom = atoi(tokens[15].c_str());	
 
-		int is_platform = atoi(tokens[16].c_str());
+		int is_not_platform = atoi(tokens[16].c_str());
 
 		obj = new CRectangle(
 			x, y,
@@ -189,7 +189,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			sprite_begin_bottom, sprite_middle_bottom, sprite_end_bottom
 		);		
 
-		if (is_platform == 1) {
+		if (is_not_platform == 0) {
 			CGameObject* obj_0 = new CPlatform(
 				x, y,
 				cell_width, cell_height, width,

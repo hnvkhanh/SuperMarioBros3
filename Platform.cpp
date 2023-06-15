@@ -111,7 +111,6 @@ void CRectangle::Render()
 }
 
 
-
 void CRectangle::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
 	float cellWidth_div_2 = this->cellWidth / 2;
@@ -147,9 +146,12 @@ void CRectangle::RenderBoundingBox()
 
 int CRectangle::IsDirectionColliable(float nx, float ny)
 {	
-	if (nx == 0 && ny == -1) return 1;
-	else return 0;
+	/*if (nx == 0 && ny == -1) return 1;
+	else return 0;*/
+	return 0;
 }
+
+//pipe
 
 void CPipe::Render()
 {
@@ -171,9 +173,6 @@ void CPipe::Render()
 
 	/*RenderBoundingBox();*/
 }
-
-
-
 
 int CPipe::IsDirectionColliable(float nx, float ny)
 {
