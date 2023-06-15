@@ -188,6 +188,10 @@ void CFireBall::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	y += vy * dt;
 	x += vx * dt;
 
+	if (x < 0 || y > 200 ) {
+		this->Delete();
+	}
+
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }

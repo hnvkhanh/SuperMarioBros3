@@ -142,6 +142,8 @@ void CMario::OnCollisionWithFireBall(LPCOLLISIONEVENT e)
 			DebugOut(L">>> Mario DIE >>> \n");
 			SetState(MARIO_STATE_DIE);
 		}
+
+		e->obj->Delete();
 	}
 }
 
