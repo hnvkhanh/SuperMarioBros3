@@ -17,6 +17,7 @@
 #include "PrizeBlock.h"
 #include "Prize.h"
 #include "Piranha.h"
+#include "InvisibleObject.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -138,7 +139,10 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_BUSH: obj = new CBush(x, y); break;
 	case OBJECT_TYPE_PIRANHA: obj = new CPiranha(x, y); break;
 	case OBJECT_TYPE_SINGLE_BG_CLOUD: obj = new CSingleBackgroundCloud(x, y); break;
-
+	case OBJECT_TYPE_INVISIBLE:
+		DebugOut(L"create invisible objects\n");
+		obj = new CInvisibleObject(x, y); 
+		break;
 	case OBJECT_TYPE_PLATFORM:
 	{
 
