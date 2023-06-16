@@ -1,4 +1,5 @@
 #include "Koopa.h"
+#include "PrizeBlock.h"
 
 #include "debug.h"
 
@@ -47,7 +48,11 @@ void CKoopa::OnCollisionWith(LPCOLLISIONEVENT e)
 			OnCollisionWithGoomba(e);					
 		}
 		return;
-	}		
+	}
+	else if (dynamic_cast<CPrizeBlock*>(e->obj)) {
+		if (e->obj->GetState() == PRIZEBLOCK_STATE_MYSTIC)
+			OnCollisionWithPrizeBlock(e);
+	}
 
 	if (e->ny != 0)
 	{		
@@ -84,6 +89,15 @@ void CKoopa::OnCollisionWithParaGoomba(LPCOLLISIONEVENT e)
 	}
 	else if (paragoomba->GetState() != GOOMBA_STATE_DIE) {
 		paragoomba->SetState(GOOMBA_HIT_BY_KOOPA);		
+	}
+}
+
+void CKoopa::OnCollisionWithPrizeBlock(LPCOLLISIONEVENT e)
+{
+	CPrizeBlock* prizeblock = dynamic_cast<CPrizeBlock*>(e->obj);
+	if (prizeblock->GetState() == PRIZEBLOCK_STATE_MYSTIC) {
+		prizeblock->SetKnownState();
+		prizeblock->SetState(PRIZEBLOCK_STATE_KNOWN_STATIC);
 	}
 }
 
