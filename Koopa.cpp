@@ -94,8 +94,8 @@ void CKoopa::OnCollisionWithParaGoomba(LPCOLLISIONEVENT e)
 
 void CKoopa::OnCollisionWithPrizeBlock(LPCOLLISIONEVENT e)
 {
-	CPrizeBlock* prizeblock = dynamic_cast<CPrizeBlock*>(e->obj);
-	if (prizeblock->GetState() == PRIZEBLOCK_STATE_MYSTIC) {
+	CPrizeBlock* prizeblock = dynamic_cast<CPrizeBlock*>(e->obj);	
+	if (prizeblock->GetState() == PRIZEBLOCK_STATE_MYSTIC && e->nx != 0) {
 		prizeblock->SetKnownState();
 		prizeblock->SetState(PRIZEBLOCK_STATE_KNOWN_STATIC);
 	}
