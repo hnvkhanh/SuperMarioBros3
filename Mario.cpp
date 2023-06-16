@@ -623,7 +623,9 @@ void CMario::SetState(int state)
 	case MARIO_STATE_READY_HOLD:
 		ready_to_hold = true;
 		break;
-				
+	case MARIO_STATE_HOLD_RELEASE:
+		isHolding = false;
+		break;
 	}
 	
 
