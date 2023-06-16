@@ -271,15 +271,38 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 				}
 			}
 			else {
-				if (e->nx > 0) {
-					SetState(MARIO_STATE_KICK_LEFT);
-					koopa->SetState(KOOPA_STATE_DIE_SLIDE_LEFT);
-				}					
-				else {
-					SetState(MARIO_STATE_KICK_RIGHT);
-					koopa->SetState(KOOPA_STATE_DIE_SLIDE_RIGHT);
+				if (e->nx != 0) {
+					if (GetState() == MARIO_STATE_READY_HOLD && (koopa->GetState() == KOOPA_STATE_SHELL || koopa->GetState() == KOOPA_STATE_REVIVE )) {
+						koopa->IsHold();
+						koopa->SetState(KOOPA_STATE_SHELL_HOLD);
+						float temp = -1; // to determine direction 
+						if (nx >= 0) temp = 1;
+						switch (level)
+						{
+						case MARIO_LEVEL_SMALL:
+							koopa->SetPosition(x + temp * MARIO_SMALL_BBOX_WIDTH / 2 + temp * KOOPA_BBOX_WIDTH / 2,
+								y - MARIO_SMALL_BBOX_HEIGHT / 2);
+							break;
+
+						case MARIO_LEVEL_BIG:
+							koopa->SetPosition(x + temp * MARIO_BIG_BBOX_WIDTH / 2 + temp * KOOPA_BBOX_WIDTH / 2, y);
+							break;
+						}
+					}
+					else {
+						if (e->nx > 0) {
+							SetState(MARIO_STATE_KICK_LEFT);
+							koopa->SetState(KOOPA_STATE_DIE_SLIDE_LEFT);
+						}
+						else {
+							SetState(MARIO_STATE_KICK_RIGHT);
+							koopa->SetState(KOOPA_STATE_DIE_SLIDE_RIGHT);
+
+						}
+					}
 					
-				}					
+				}						
+
 			}
 		}
 	}

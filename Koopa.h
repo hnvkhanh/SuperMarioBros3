@@ -85,6 +85,8 @@ protected:
 public:
 	CKoopa(float x, float y, int c);
 	virtual void SetState(int state);
+	bool IsHold() { return is_hold; }
+	void SetIsHold() { is_hold = true; }
 };
 
 
@@ -95,9 +97,7 @@ protected:
 	bool go_left;
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();	
-	virtual void OnCollisionWith(LPCOLLISIONEVENT e);		
-	bool IsHold() { return is_hold; }
-	void SetIsHold() { is_hold = true; }
+	virtual void OnCollisionWith(LPCOLLISIONEVENT e);	
 
 public:
 	CParaTroopa(float x, float y, int c);
