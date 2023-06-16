@@ -482,20 +482,29 @@ int CMario::GetAniIdBig()
 	int aniId = -1;
 	if (!isOnPlatform)
 	{
-		if (abs(ax) == MARIO_ACCEL_RUN_X)
-		{			
+		if (isHolding) {
 			if (nx >= 0)
-				aniId = ID_ANI_MARIO_JUMP_RUN_RIGHT;
+				aniId = ID_ANI_MARIO_BIG_HOLD_JUMP_RIGHT;
 			else
-				aniId = ID_ANI_MARIO_JUMP_RUN_LEFT;
+				aniId = ID_ANI_MARIO_BIG_HOLD_JUMP_LEFT;
 		}
-		else
-		{
-			if (nx >= 0)
-				aniId = ID_ANI_MARIO_JUMP_WALK_RIGHT;
+		else {
+			if (abs(ax) == MARIO_ACCEL_RUN_X)
+			{
+				if (nx >= 0)
+					aniId = ID_ANI_MARIO_JUMP_RUN_RIGHT;
+				else
+					aniId = ID_ANI_MARIO_JUMP_RUN_LEFT;
+			}
 			else
-				aniId = ID_ANI_MARIO_JUMP_WALK_LEFT;
+			{
+				if (nx >= 0)
+					aniId = ID_ANI_MARIO_JUMP_WALK_RIGHT;
+				else
+					aniId = ID_ANI_MARIO_JUMP_WALK_LEFT;
+			}
 		}
+		
 	}
 	else
 		if (isSitting)
