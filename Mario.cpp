@@ -41,6 +41,24 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	isOnPlatform = false;
 
+	if (isHolding) {
+		float temp = -1; // to determine direction 
+		if (nx >= 0) temp = 1;
+		switch (level)
+		{
+		case MARIO_LEVEL_SMALL:
+			koopa_shell->SetPosition(x + temp * MARIO_SMALL_BBOX_WIDTH / 2 + temp * KOOPA_BBOX_WIDTH / 2,
+				y - MARIO_SMALL_BBOX_HEIGHT / 2);
+			DebugOut(L"change koopa position\n");
+			break;
+
+		case MARIO_LEVEL_BIG:
+			koopa_shell->SetPosition(x + temp * MARIO_BIG_BBOX_WIDTH / 2 + temp * KOOPA_BBOX_WIDTH / 2, y);
+			DebugOut(L"change koopa position\n");
+			break;
+		}
+	}
+
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
@@ -275,6 +293,7 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 					/*DebugOut(L"koopa state %d\n", koopa->GetState());
 					DebugOut(L"mario state %d\n", state);*/
 					if (ready_to_hold && (koopa->GetState() == KOOPA_STATE_SHELL || koopa->GetState() == KOOPA_STATE_REVIVE )) {
+						koopa_shell = koopa;
 						DebugOut(L"state ready\n");
 						koopa->IsHold();
 						koopa->SetState(KOOPA_STATE_SHELL_HOLD);

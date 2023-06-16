@@ -3,6 +3,7 @@
 
 #include "Animation.h"
 #include "Animations.h"
+#include "Koopa.h"
 
 #include "debug.h"
 
@@ -151,6 +152,7 @@ class CMario : public CGameObject
 	ULONGLONG kick_start;
 	ULONGLONG transform_start;
 	BOOLEAN isOnPlatform;
+	CKoopa* koopa_shell;
 	int coin; 
 
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);

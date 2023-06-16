@@ -89,6 +89,9 @@ void CKoopa::OnCollisionWithParaGoomba(LPCOLLISIONEVENT e)
 
 void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	if (state == KOOPA_STATE_SHELL_HOLD) {
+		return;
+	}
 	vy += ay * dt;
 	vx += ax * dt;	
 
