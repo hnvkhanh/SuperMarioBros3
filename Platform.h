@@ -8,6 +8,7 @@
 class CPlatform : public CGameObject
 {
 protected: 
+	bool nx_collidable;
 	int length;				// Unit: cell 
 	float cellWidth;
 	float cellHeight;
@@ -16,7 +17,7 @@ protected:
 public: 
 	CPlatform(float x, float y,
 		float cell_width, float cell_height, int length,
-		int sprite_id_begin, int sprite_id_middle, int sprite_id_end) :CGameObject(x, y)
+		int sprite_id_begin, int sprite_id_middle, int sprite_id_end, int collidable) :CGameObject(x, y)
 	{
 		this->length = length;
 		this->cellWidth = cell_width;
@@ -24,6 +25,7 @@ public:
 		this->spriteIdBegin = sprite_id_begin;
 		this->spriteIdMiddle = sprite_id_middle;
 		this->spriteIdEnd = sprite_id_end;
+		this->nx_collidable = (collidable == 1);
 	}
 
 	void Render();
@@ -39,7 +41,7 @@ public:
 class CRectangle : public CGameObject
 {
 protected:
-	int height, width;				// Unit: cell 
+	int height, width;		
 	float cellWidth;
 	float cellHeight;
 	int spriteIdBeginTop, spriteIdMiddleTop, spriteIdEndTop;
@@ -94,7 +96,7 @@ public:
 		float cell_width, float cell_height, int length,
 		int sprite_id_begin_top, int sprite_id_end_top, 
 		int sprite_id_begin_body, int sprite_id_end_body) :CPlatform(x, y,
-			cell_width, cell_height, length, sprite_id_begin_top, sprite_id_end_top, sprite_id_begin_body)
+			cell_width, cell_height, length, sprite_id_begin_top, sprite_id_end_top, sprite_id_begin_body, 1)
 	{		
 		this->spriteIdBeginTop = sprite_id_begin_top;		
 		this->spriteIdEndTop = sprite_id_end_top;
