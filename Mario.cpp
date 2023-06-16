@@ -296,11 +296,11 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 						isHolding = true;
 					}
 					else {
-						if (e->nx > 0) {
+						if (e->nx > 0 && !isHolding) {
 							SetState(MARIO_STATE_KICK_LEFT);
 							koopa->SetState(KOOPA_STATE_DIE_SLIDE_LEFT);
 						}
-						else {
+						else if (e->nx < 0 && !isHolding) {
 							SetState(MARIO_STATE_KICK_RIGHT);
 							koopa->SetState(KOOPA_STATE_DIE_SLIDE_RIGHT);
 
