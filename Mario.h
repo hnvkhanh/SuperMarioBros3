@@ -103,8 +103,8 @@
 #define ID_ANI_TRANSFORM_TO_BIG_LEFT 1801
 #define ID_ANI_TRANSFORM_TO_BIG_RIGHT 1800
 
-#define ID_ANI_MARIO_SMALL_HOLD_RUN_RIGHT 1650
-#define ID_ANI_MARIO_SMALL_HOLD_RUN_LEFT 1651
+#define ID_ANI_MARIO_SMALL_HOLD_RUN_RIGHT 1651
+#define ID_ANI_MARIO_SMALL_HOLD_RUN_LEFT 1650
 #define ID_ANI_MARIO_SMALL_HOLD_STAND_RIGHT 1652
 #define ID_ANI_MARIO_SMALL_HOLD_STAND_LEFT 1653
 #define ID_ANI_MARIO_SMALL_HOLD_JUMP_RIGHT 1660
@@ -137,7 +137,7 @@
 
 class CMario : public CGameObject
 {
-	BOOLEAN isSitting;
+	BOOLEAN isSitting, isHolding;
 	BOOLEAN kickSomething;
 	BOOLEAN transforming;
 	BOOLEAN ready_to_hold;
@@ -170,6 +170,7 @@ class CMario : public CGameObject
 public:
 	CMario(float x, float y) : CGameObject(x, y)
 	{
+		isHolding = false;
 		isSitting = false;
 		kickSomething = false;
 		transforming = false;

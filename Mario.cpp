@@ -283,15 +283,17 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 						switch (level)
 						{
 						case MARIO_LEVEL_SMALL:
-							koopa->SetPosition(x + temp * MARIO_SMALL_BBOX_WIDTH / 2 + temp * KOOPA_BBOX_WIDTH / 2,
+							koopa->SetPosition(x + temp * MARIO_SMALL_BBOX_WIDTH/2 + temp * KOOPA_BBOX_WIDTH / 2,
 								y - MARIO_SMALL_BBOX_HEIGHT / 2);		
 							DebugOut(L"change koopa position\n");
 							break;
 
 						case MARIO_LEVEL_BIG:
-							koopa->SetPosition(x + temp * MARIO_BIG_BBOX_WIDTH / 2 + temp * KOOPA_BBOX_WIDTH / 2, y);
+							koopa->SetPosition(x + temp * MARIO_BIG_BBOX_WIDTH/2 + temp * KOOPA_BBOX_WIDTH/2, y);
+							DebugOut(L"change koopa position\n");
 							break;
 						}
+						isHolding = true;
 					}
 					else {
 						if (e->nx > 0) {
@@ -387,7 +389,13 @@ int CMario::GetAniIdSmall()
 				aniId = ID_ANI_MARIO_SIT_RIGHT;
 			else
 				aniId = ID_ANI_MARIO_SIT_LEFT;
-		}		
+		}
+		else if (isHolding) {
+			if (nx > 0)
+				aniId = ID_ANI_MARIO_SMALL_HOLD_STAND_RIGHT;
+			else
+				aniId = ID_ANI_MARIO_SMALL_HOLD_STAND_LEFT;
+		}
 		else
 			if (vx == 0)
 			{
@@ -463,6 +471,12 @@ int CMario::GetAniIdBig()
 				aniId = ID_ANI_MARIO_SIT_RIGHT;
 			else
 				aniId = ID_ANI_MARIO_SIT_LEFT;
+		}
+		else if (isHolding) {
+			if (nx > 0)
+				aniId = ID_ANI_MARIO_BIG_HOLD_STAND_RIGHT;
+			else
+				aniId = ID_ANI_MARIO_BIG_HOLD_STAND_LEFT;
 		}
 		else
 			if (vx == 0)
