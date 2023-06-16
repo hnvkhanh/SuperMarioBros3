@@ -1,5 +1,6 @@
 # id	left	top	right	bottom	texture_id
 [SPRITES]
+# decoration bush
 60000	520	214	651	280	30
 
 #piranha plant

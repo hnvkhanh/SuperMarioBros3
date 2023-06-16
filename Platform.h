@@ -76,7 +76,7 @@ public:
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 	void RenderBoundingBox();
 	int IsDirectionColliable(float nx, float ny);	
-	int IsBlocking() { return 0; };
+	int IsBlocking() { return 1; };
 };
 
 //typedef CRectangle* LPRECTANGLE;
