@@ -169,6 +169,8 @@ void CKoopa::SetState(int state)
 	case KOOPA_STATE_SHELL_HOLD:
 		vx = 0;
 		vy = 0;
+		ay = 0;
+		ax = 0;
 		is_hold = true;
 		break;
 	case KOOPA_STATE_SHELL:

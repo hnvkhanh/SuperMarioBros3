@@ -256,7 +256,7 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 
 		if (untouchable == 0)
 		{
-			if (koopa->GetState() != KOOPA_STATE_SHELL && koopa->GetState() != KOOPA_STATE_REVIVE)
+			if (koopa->GetState() == KOOPA_STATE_DIE_SLIDE_LEFT || koopa->GetState() == KOOPA_STATE_DIE_SLIDE_RIGHT)
 			{	
 				
 				if (level > MARIO_LEVEL_SMALL)
@@ -272,7 +272,10 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 			}
 			else {
 				if (e->nx != 0) {
-					if (GetState() == MARIO_STATE_READY_HOLD && (koopa->GetState() == KOOPA_STATE_SHELL || koopa->GetState() == KOOPA_STATE_REVIVE )) {
+					/*DebugOut(L"koopa state %d\n", koopa->GetState());
+					DebugOut(L"mario state %d\n", state);*/
+					if (ready_to_hold && (koopa->GetState() == KOOPA_STATE_SHELL || koopa->GetState() == KOOPA_STATE_REVIVE )) {
+						DebugOut(L"state ready\n");
 						koopa->IsHold();
 						koopa->SetState(KOOPA_STATE_SHELL_HOLD);
 						float temp = -1; // to determine direction 
@@ -281,7 +284,8 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 						{
 						case MARIO_LEVEL_SMALL:
 							koopa->SetPosition(x + temp * MARIO_SMALL_BBOX_WIDTH / 2 + temp * KOOPA_BBOX_WIDTH / 2,
-								y - MARIO_SMALL_BBOX_HEIGHT / 2);
+								y - MARIO_SMALL_BBOX_HEIGHT / 2);		
+							DebugOut(L"change koopa position\n");
 							break;
 
 						case MARIO_LEVEL_BIG:
@@ -520,6 +524,7 @@ void CMario::SetState(int state)
 {
 	// DIE is the end state, cannot be changed! 
 	if (this->state == MARIO_STATE_DIE) return; 
+	ready_to_hold = false;
 
 	switch (state)
 	{
@@ -600,6 +605,9 @@ void CMario::SetState(int state)
 		DebugOut(L"transform happen\n");
 		transforming = true;
 		transform_start = GetTickCount64();		
+		break;
+	case MARIO_STATE_READY_HOLD:
+		ready_to_hold = true;
 		break;
 				
 	}

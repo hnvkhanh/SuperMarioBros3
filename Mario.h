@@ -140,6 +140,7 @@ class CMario : public CGameObject
 	BOOLEAN isSitting;
 	BOOLEAN kickSomething;
 	BOOLEAN transforming;
+	BOOLEAN ready_to_hold;
 	float maxVx;
 	float ax;				// acceleration on x 
 	float ay;				// acceleration on y 
@@ -202,4 +203,7 @@ public:
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount64(); }
 
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+	void SetHold(bool val) {
+		ready_to_hold = val;
+	}
 };
