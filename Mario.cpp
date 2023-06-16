@@ -236,9 +236,9 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 	if (e->ny < 0)
 	{			
 
-		if (koopa->GetState() != KOOPA_STATE_DIE)
+		if (koopa->GetState() != KOOPA_STATE_SHELL)
 		{
-			koopa->SetState(KOOPA_STATE_DIE);
+			koopa->SetState(KOOPA_STATE_SHELL);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
 		else {							
@@ -256,7 +256,7 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 
 		if (untouchable == 0)
 		{
-			if (koopa->GetState() != KOOPA_STATE_DIE && koopa->GetState() != KOOPA_STATE_REVIVE)
+			if (koopa->GetState() != KOOPA_STATE_SHELL && koopa->GetState() != KOOPA_STATE_REVIVE)
 			{	
 				
 				if (level > MARIO_LEVEL_SMALL)

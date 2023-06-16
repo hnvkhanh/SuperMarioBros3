@@ -23,7 +23,8 @@
 #define KOOPA_REVIVE_TIMEOUT 1000
 
 #define KOOPA_STATE_WALKING 100
-#define KOOPA_STATE_DIE 200
+#define KOOPA_STATE_SHELL 200
+#define KOOPA_STATE_SHELL_HOLD 201
 #define KOOPA_WALK_TO_LEFT 300
 #define KOOPA_WALK_TO_RIGHT 400
 #define KOOPA_STATE_DIE_SLIDE_LEFT 500
@@ -65,6 +66,7 @@ protected:
 	float ax;
 	float ay;
 	int color;
+	bool is_hold;
 	ULONGLONG die_start;
 	ULONGLONG revive_start;
 
@@ -94,6 +96,8 @@ protected:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();	
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);		
+	bool IsHold() { return is_hold; }
+	void SetIsHold() { is_hold = true; }
 
 public:
 	CParaTroopa(float x, float y, int c);

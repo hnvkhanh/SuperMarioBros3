@@ -14,7 +14,7 @@ CKoopa::CKoopa(float x, float y, int c) :CGameObject(x, y)
 
 void CKoopa::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	if (state == KOOPA_STATE_DIE || state == KOOPA_STATE_DIE_SLIDE_LEFT || state == KOOPA_STATE_DIE_SLIDE_RIGHT)
+	if (state == KOOPA_STATE_SHELL || state == KOOPA_STATE_DIE_SLIDE_LEFT || state == KOOPA_STATE_DIE_SLIDE_RIGHT)
 	{
 		left = x - KOOPA_BBOX_WIDTH / 2;
 		top = y - KOOPA_BBOX_HEIGHT_DIE / 2;
@@ -92,7 +92,7 @@ void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += ay * dt;
 	vx += ax * dt;	
 
-	if ((state == KOOPA_STATE_DIE) && (GetTickCount64() - die_start > KOOPA_DIE_TIMEOUT))
+	if ((state == KOOPA_STATE_SHELL) && (GetTickCount64() - die_start > KOOPA_DIE_TIMEOUT))
 	{
 		SetState(KOOPA_STATE_REVIVE);
 	}
@@ -112,7 +112,7 @@ void CKoopa::Render()
 	if (color == 0) {
 		aniId = ID_ANI_RED_KOOPA_DIE;
 		switch (state) {
-		case KOOPA_STATE_DIE:
+		case KOOPA_STATE_SHELL:
 			aniId = ID_ANI_RED_KOOPA_DIE;
 			break;
 
@@ -134,7 +134,7 @@ void CKoopa::Render()
 	else {
 		aniId = ID_ANI_GREEN_KOOPA_DIE;
 		switch (state) {
-		case KOOPA_STATE_DIE:
+		case KOOPA_STATE_SHELL:
 			aniId = ID_ANI_GREEN_KOOPA_DIE;
 			break;
 
@@ -166,7 +166,12 @@ void CKoopa::SetState(int state)
 	CGameObject::SetState(state);
 	switch (state)
 	{
-	case KOOPA_STATE_DIE:
+	case KOOPA_STATE_SHELL_HOLD:
+		vx = 0;
+		vy = 0;
+		is_hold = true;
+		break;
+	case KOOPA_STATE_SHELL:
 		die_start = GetTickCount64();				
 		if (previous_state != KOOPA_STATE_DIE_SLIDE_LEFT && previous_state != KOOPA_STATE_DIE_SLIDE_RIGHT) {
 			y += (KOOPA_BBOX_HEIGHT - KOOPA_BBOX_HEIGHT_DIE) / 2;
@@ -227,7 +232,7 @@ void CParaTroopa::Render()
 	if (color == 0) {
 		aniId = ID_ANI_RED_KOOPA_DIE;
 		switch (state) {
-		case KOOPA_STATE_DIE:
+		case KOOPA_STATE_SHELL:
 			aniId = ID_ANI_RED_KOOPA_DIE;
 			break;
 
@@ -258,7 +263,7 @@ void CParaTroopa::Render()
 	else {
 		aniId = ID_ANI_GREEN_KOOPA_DIE;
 		switch (state) {
-		case KOOPA_STATE_DIE:
+		case KOOPA_STATE_SHELL:
 			aniId = ID_ANI_GREEN_KOOPA_DIE;
 			break;
 
