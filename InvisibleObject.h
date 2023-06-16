@@ -6,7 +6,7 @@ Using this in case: when I should update Wing Koopas
 #include "GameObject.h"
 #include "debug.h"
 
-#define INVISIBLE_BBOX_WIDTH 5
+#define INVISIBLE_BBOX_WIDTH 10
 #define INVISIBLE_BBOX_HEIGHT 100
 
 class CInvisibleObject : public CGameObject
@@ -19,9 +19,8 @@ public:
 	{
 		block = 0;
 	}
-	void Render() { 
-		DebugOut(L"render bounding box\n");
-		RenderBoundingBox(); 
+	void Render() { 		
+		/*RenderBoundingBox(); */
 	}
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void GetBoundingBox(float& l, float& t, float& r, float& b);

@@ -18,7 +18,7 @@
 #define PIRANHA_SPEED 0.025f
 
 #define PIRANHA_TIMEOUT 1300
-#define PIRANHA_WAIT_TIMEOUT 3000
+#define PIRANHA_WAIT_TIMEOUT 2000
 
 // venus fire trap
 

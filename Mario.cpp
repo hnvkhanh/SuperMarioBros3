@@ -274,7 +274,10 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 
 		if (untouchable == 0)
 		{
-			if (koopa->GetState() == KOOPA_STATE_DIE_SLIDE_LEFT || koopa->GetState() == KOOPA_STATE_DIE_SLIDE_RIGHT)
+			if (koopa->GetState() == KOOPA_STATE_DIE_SLIDE_LEFT 
+				|| koopa->GetState() == KOOPA_STATE_DIE_SLIDE_RIGHT 
+				|| koopa->GetState() == KOOPA_WALK_TO_LEFT
+				|| koopa->GetState() == KOOPA_WALK_TO_RIGHT)
 			{	
 				
 				if (level > MARIO_LEVEL_SMALL)
@@ -578,6 +581,16 @@ void CMario::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
 	int aniId = -1;
+
+	if (untouchable == 1) {
+		if (!show) {
+			ToggleShow();			
+			return;
+		}
+	}
+	else {
+		show = true;
+	}
 
 	if (state == MARIO_STATE_DIE)
 		aniId = ID_ANI_MARIO_DIE;

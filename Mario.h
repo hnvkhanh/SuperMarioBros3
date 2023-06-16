@@ -142,6 +142,7 @@ class CMario : public CGameObject
 	BOOLEAN kickSomething;
 	BOOLEAN transforming;
 	BOOLEAN ready_to_hold;
+	bool show;
 	float maxVx;
 	float ax;				// acceleration on x 
 	float ay;				// acceleration on y 
@@ -172,6 +173,7 @@ class CMario : public CGameObject
 public:
 	CMario(float x, float y) : CGameObject(x, y)
 	{
+		show = true;
 		isHolding = false;
 		isSitting = false;
 		kickSomething = false;
@@ -211,5 +213,8 @@ public:
 	}
 	void ReleaseKoopaShell() {
 		koopa_shell->SetIsHold(false);
+	}
+	void ToggleShow() {
+		show = !show;
 	}
 };
