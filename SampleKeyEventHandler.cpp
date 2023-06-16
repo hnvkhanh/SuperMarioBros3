@@ -50,7 +50,7 @@ void CSampleKeyHandler::OnKeyUp(int KeyCode)
 		mario->SetState(MARIO_STATE_SIT_RELEASE);
 		break;
 	case DIK_A:
-		mario->SetState(MARIO_STATE_HOLD_RELEASE);
+		mario->SetState(MARIO_STATE_HOLD_RELEASE);		
 		break;
 	}
 	

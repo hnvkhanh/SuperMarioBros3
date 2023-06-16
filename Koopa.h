@@ -86,7 +86,7 @@ public:
 	CKoopa(float x, float y, int c);
 	virtual void SetState(int state);
 	bool IsHold() { return is_hold; }
-	void SetIsHold() { is_hold = true; }
+	void SetIsHold(bool val=true) { is_hold = val; }
 };
 
 

@@ -644,6 +644,12 @@ void CMario::SetState(int state)
 		break;
 	case MARIO_STATE_HOLD_RELEASE:
 		isHolding = false;
+		if (nx > 0) {
+			koopa_shell->SetState(KOOPA_STATE_DIE_SLIDE_RIGHT);
+		}
+		else {
+			koopa_shell->SetState(KOOPA_STATE_DIE_SLIDE_LEFT);
+		}
 		break;
 	}
 	

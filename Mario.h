@@ -209,4 +209,7 @@ public:
 	void SetHold(bool val) {
 		ready_to_hold = val;
 	}
+	void ReleaseKoopaShell() {
+		koopa_shell->SetIsHold(false);
+	}
 };
