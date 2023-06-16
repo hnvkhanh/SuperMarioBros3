@@ -151,8 +151,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		int length = atoi(tokens[5].c_str());
 		int sprite_begin = atoi(tokens[6].c_str());
 		int sprite_middle = atoi(tokens[7].c_str());
-		int sprite_end = atoi(tokens[8].c_str());
-
+		int sprite_end = atoi(tokens[8].c_str());		
 		obj = new CPlatform(
 			x, y,
 			cell_width, cell_height, length,
@@ -206,8 +205,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 				objects.push_back(obj_0);			
 		}
-		
-		
+				
 
 		break;
 	}

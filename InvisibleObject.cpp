@@ -1,5 +1,6 @@
 #include "InvisibleObject.h"
 #include "Koopa.h"
+#include "Goomba.h"
 
 void CInvisibleObject::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
@@ -23,6 +24,9 @@ void CInvisibleObject::OnCollisionWith(LPCOLLISIONEVENT e)
 		else {
 			block = 1;
 		}
+	}
+	else if (dynamic_cast<CGoomba*>(e->obj) || dynamic_cast<CParaGoomba*>(e->obj)) {
+		block = 1;
 	}
 	else
 		block = 0;

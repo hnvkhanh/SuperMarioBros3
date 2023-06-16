@@ -71,7 +71,7 @@ decoration.txt
 
 
 # MARIO
-0	300	100
+0	1000	100
 
 #prize block
 #id	x	y	type_of_prize
@@ -107,9 +107,12 @@ decoration.txt
 # rectangle (use as platform)
 8	630	180	15	15	32	2	51000	52000	53000	53100	53200	53300	53100	53200	53300	0	0
 
-16	400	100
 
 #Platform
 #id	x	y	w	h	length	id1	id2	id3
 5 	0	195	15	15	42	51000	52000	53000
 
+#Invisible wall
+16	500	100
+16	600	100
+16	1100	100
