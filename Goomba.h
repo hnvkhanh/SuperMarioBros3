@@ -52,7 +52,7 @@ class CGoomba : public CGameObject
 protected:
 	float ax;				
 	float ay; 
-
+	bool frozen, started_flag;
 	ULONGLONG die_start;
 	ULONGLONG bounce_start;
 

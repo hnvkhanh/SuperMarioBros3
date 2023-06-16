@@ -7,7 +7,7 @@ Using this in case: when I should update Wing Koopas
 #include "debug.h"
 
 #define INVISIBLE_BBOX_WIDTH 5
-#define INVISIBLE_BBOX_HEIGHT 500
+#define INVISIBLE_BBOX_HEIGHT 100
 
 class CInvisibleObject : public CGameObject
 {

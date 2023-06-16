@@ -2,8 +2,10 @@
 
 CGoomba::CGoomba(float x, float y):CGameObject(x, y)
 {
+	this->frozen = true;
 	this->ax = 0;
 	this->ay = GOOMBA_GRAVITY;
+	started_flag = false;
 	die_start = -1;
 	bounce_start = -1;
 	SetState(GOOMBA_STATE_WALKING);
@@ -53,6 +55,15 @@ void CGoomba::OnCollisionWith(LPCOLLISIONEVENT e)
 
 void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
+	float cx, cy, cw, ch;
+	CGame::GetInstance()->GetCamPos(cx, cy);
+	if ((x >= cx && x <= cx + 320) && !started_flag) {
+		frozen = false;
+		started_flag = true;
+	}
+	if (frozen) {
+		return;
+	}
 	vy += ay * dt;
 	vx += ax * dt;
 

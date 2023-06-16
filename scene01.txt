@@ -71,7 +71,7 @@ decoration.txt
 
 
 # MARIO
-0	1000	100
+0	100	100
 
 #prize block
 #id	x	y	type_of_prize
@@ -115,4 +115,4 @@ decoration.txt
 #Invisible wall
 16	500	100
 16	600	100
-16	1100	100
+16	1100	150
