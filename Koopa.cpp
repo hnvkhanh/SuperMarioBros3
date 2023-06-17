@@ -139,7 +139,7 @@ void CKoopa::Render()
 		case KOOPA_WALK_TO_RIGHT:
 			aniId = ID_ANI_RED_KOOPA_WALKING_RIGHT;
 			break;
-		case KOOPA_STATE_DIE_SLIDE_LEFT:
+		case KOOPA_STATE_DIE_SLIDE_LEFT:			
 		case KOOPA_STATE_DIE_SLIDE_RIGHT:
 			aniId = ID_ANI_RED_KOOPA_DIE_SLIDE;
 			break;

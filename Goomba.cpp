@@ -173,7 +173,15 @@ void CParaGoomba::GetBoundingBox(float& left, float& top, float& right, float& b
 
 void CParaGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {	
-
+	float cx, cy, cw, ch;
+	CGame::GetInstance()->GetCamPos(cx, cy);
+	if ((x >= cx && x <= cx + 320) && !started_flag) {
+		frozen = false;
+		started_flag = true;
+	}
+	if (frozen) {
+		return;
+	}
 	
 	if ((state == PARAGOOMBA_STATE_WING_FLYING) && (GetTickCount64() - fly_start > PARAGOOMBA_FLYING_TIMEOUT))
 	{		
