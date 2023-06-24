@@ -116,8 +116,9 @@ void CMario::OnCollisionWithPrizeBlock(LPCOLLISIONEVENT e)
 	{	
 		if (prizeBlock->GetState() == PRIZEBLOCK_STATE_MYSTIC) {
 			prizeBlock->SetKnownState();
+			prizeBlock->SetState(PRIZEBLOCK_STATE_KNOWN_MOVING_UP);
 		}
-		prizeBlock->SetState(PRIZEBLOCK_STATE_KNOWN_MOVING_UP);		
+			
 	}	
 	prizeBlock->ResetPosition();
 	
