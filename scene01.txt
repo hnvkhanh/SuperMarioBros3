@@ -73,7 +73,7 @@ decoration.txt
 
 
 # MARIO
-0	100	100
+0	700	100
 
 #prize block
 #id	x	y	type_of_prize

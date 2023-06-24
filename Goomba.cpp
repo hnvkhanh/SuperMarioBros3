@@ -183,24 +183,33 @@ void CParaGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		return;
 	}
 	
-	if ((state == PARAGOOMBA_STATE_WING_FLYING) && (GetTickCount64() - fly_start > PARAGOOMBA_FLYING_TIMEOUT))
-	{		
-		SetState(PARAGOOMBA_STATE_WING_WALKING);
+
+	if (state == PARAGOOMBA_STATE_WING_JUMPING) {
 		
-	}
-	if (on_platform){
-
-		if (state == PARAGOOMBA_STATE_WING_WALKING && wait_start == -1) {
-			// START WAIT TIME			
-			this->StartWaitTime();
-
+		if (jump_count >= 3) {			
+			SetState(PARAGOOMBA_STATE_WING_FLYING);
+			jump_count = 0;			
 		}
+		else if (GetTickCount64() - jump_start > PARAGOOMBA_JUMP_TIMEOUT) {			
+			SetState(PARAGOOMBA_STATE_WING_JUMPING);
+		}
+			
 	}
-	if ((state == PARAGOOMBA_STATE_WING_WALKING) && (GetTickCount64() - wait_start > PARAGOOMBA_WAIT_TIMEOUT) && on_platform) {
-				
-		SetState(PARAGOOMBA_STATE_WING_FLYING);
-		on_platform = false;
+
+	//bug
+	if (state == PARAGOOMBA_STATE_WING_FLYING) {
+		if (GetTickCount64() - fly_start > PARAGOOMBA_FLYING_TIMEOUT) {
+			SetState(PARAGOOMBA_STATE_WING_WALKING);
+		}		
 	}
+
+
+	if (state == PARAGOOMBA_STATE_WING_WALKING) {
+		if (GetTickCount64() - wait_start >= PARAGOOMBA_WAIT_TIMEOUT) {
+			wait_start = -1;			
+			SetState(PARAGOOMBA_STATE_WING_JUMPING);
+		}
+	}		
 	
 
 	CGoomba::Update(dt, coObjects);
@@ -234,6 +243,8 @@ CParaGoomba::CParaGoomba(float x, float y):CGoomba(x, y)
 {		
 	wait_start = -1;
 	fly_start = -1;
+	jump_start = -1;
+	jump_count = 0;
 	vx = -GOOMBA_WALKING_SPEED;
 	ay = 0;
 	vy = 0;
@@ -261,14 +272,10 @@ void CParaGoomba::SetState(int state)
 		ay = 0;
 		break;
 	case PARAGOOMBA_STATE_WING_WALKING:
-		/*ay = GOOMBA_GRAVITY;	
-		vy = 0;*/
-		/*break;*/
+		wait_start = GetTickCount64();		
 	case GOOMBA_STATE_WALKING:
 		ay = GOOMBA_GRAVITY;
-		vy = 0;
-		/*fly_start = -1;
-		wait_start = -1;*/
+		vy = 0;		
 		vx = -GOOMBA_WALKING_SPEED;
 		break;
 	case GOOMBA_HIT_BY_KOOPA:
@@ -277,5 +284,11 @@ void CParaGoomba::SetState(int state)
 		ay = -GOOMBA_GRAVITY;
 		bounce_start = GetTickCount64();
 		break;
+	case PARAGOOMBA_STATE_WING_JUMPING:
+		jump_start = GetTickCount64();
+		vy = -PARAGOOMBA_JUMP_SPEED;
+		jump_count += 1;
+		break;
+	
 	}
 }

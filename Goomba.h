@@ -34,11 +34,14 @@
 
 #define PARAGOOMBA_STATE_WING_FLYING 410
 #define PARAGOOMBA_STATE_WING_WALKING 411
+#define PARAGOOMBA_STATE_WING_JUMPING 412
 
 #define PARAGOOMBA_UP_SPEED 0.04f
+#define PARAGOOMBA_JUMP_SPEED 0.04f
 
 #define PARAGOOMBA_FLYING_TIMEOUT 600
 #define PARAGOOMBA_WAIT_TIMEOUT 200
+#define PARAGOOMBA_JUMP_TIMEOUT 200
 
 #define ID_ANI_PARAGOOMBA_WALKING 5100
 #define ID_ANI_PARAGOOMBA_DIE 5101
@@ -78,7 +81,8 @@ public:
 class CParaGoomba : public CGoomba
 {
 protected:		
-	ULONGLONG fly_start, wait_start;
+	ULONGLONG fly_start, wait_start, jump_start;
+	int jump_count;
 	bool on_platform;
 	virtual void Render();			
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
