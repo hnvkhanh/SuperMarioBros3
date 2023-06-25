@@ -132,6 +132,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_PARATROOPA: 
 		obj = new CParaTroopa(x, y, atoi(tokens[3].c_str())); break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
+	case OBJECT_TYPE_GLASS_BRICK: obj = new CGlassBrick(x, y); break;
 	case OBJECT_TYPE_PRIZEBLOCK: 		
 		obj = new CPrizeBlock(x, y, atoi(tokens[3].c_str())); break;
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;	
@@ -385,14 +386,13 @@ void CPlayScene::Update(DWORD dt)
 
 	CGame *game = CGame::GetInstance();
 	cx -= game->GetBackBufferWidth() / 2;
-	/*cy -= game->GetBackBufferHeight() / 2;*/
+
 	 
 	if (cx < 0) cx = 0;
 
 	float old_cx, old_cy;
 	CGame::GetInstance()->GetCamPos(old_cx, old_cy);
 
-	//DebugOutTitle(L"mario y: %f cy: %f", cy, old_cy);
 	CMario* mario = dynamic_cast<CMario*>(player);
 
 	if (mario->GetLevel() == MARIO_LEVEL_RACCOON)
