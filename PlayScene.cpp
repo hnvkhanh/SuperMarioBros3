@@ -406,7 +406,6 @@ void CPlayScene::Update(DWORD dt)
 		cy = DEFAULT_CAMERA_POSITION_Y;
 	
 	
-
 	CGame::GetInstance()->SetCamPos(cx,  cy);
 
 	PurgeDeletedObjects();
