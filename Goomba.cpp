@@ -192,11 +192,9 @@ void CParaGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 		else if (GetTickCount64() - jump_start > PARAGOOMBA_JUMP_TIMEOUT) {			
 			SetState(PARAGOOMBA_STATE_WING_JUMPING);
-		}
-			
+		}			
 	}
 
-	//bug
 	if (state == PARAGOOMBA_STATE_WING_FLYING) {
 		if (GetTickCount64() - fly_start > PARAGOOMBA_FLYING_TIMEOUT) {
 			SetState(PARAGOOMBA_STATE_WING_WALKING);

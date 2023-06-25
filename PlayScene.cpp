@@ -385,11 +385,29 @@ void CPlayScene::Update(DWORD dt)
 
 	CGame *game = CGame::GetInstance();
 	cx -= game->GetBackBufferWidth() / 2;
-	cy -= game->GetBackBufferHeight() / 2;
-
+	/*cy -= game->GetBackBufferHeight() / 2;*/
+	 
 	if (cx < 0) cx = 0;
 
-	CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
+	float old_cx, old_cy;
+	CGame::GetInstance()->GetCamPos(old_cx, old_cy);
+
+	//DebugOutTitle(L"mario y: %f cy: %f", cy, old_cy);
+	CMario* mario = dynamic_cast<CMario*>(player);
+
+	if (mario->GetLevel() == MARIO_LEVEL_RACCOON)
+	{
+		// do something
+	}
+	else
+		cy = DEFAULT_CAMERA_POSITION_Y;
+
+	if (cy >= DEFAULT_CAMERA_POSITION_Y)
+		cy = DEFAULT_CAMERA_POSITION_Y;
+	
+	
+
+	CGame::GetInstance()->SetCamPos(cx,  cy);
 
 	PurgeDeletedObjects();
 }

@@ -9,6 +9,10 @@
 #include "BackgroundObject.h"
 #include "Koopa.h"
 
+#define CAMERA_POSITION_MIN_Y 0
+#define DEFAULT_CAMERA_POSITION_Y 222
+#define CAMERA_POSITION_MAX_X 2499
+
 
 class CPlayScene: public CScene
 {

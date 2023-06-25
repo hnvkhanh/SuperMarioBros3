@@ -122,6 +122,7 @@
 
 #define	MARIO_LEVEL_SMALL	1
 #define	MARIO_LEVEL_BIG		2
+#define	MARIO_LEVEL_RACCOON		3
 
 #define MARIO_BIG_BBOX_WIDTH  14
 #define MARIO_BIG_BBOX_HEIGHT 24
@@ -216,5 +217,8 @@ public:
 	}
 	void ToggleShow() {
 		show = !show;
+	}
+	int GetLevel() {
+		return level;
 	}
 };
