@@ -22,11 +22,11 @@ void CPiranha::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	y += vy * dt;
 	
 
-	if ((state == PIRANHA_STATE_UP) && (GetTickCount64() - up_start > PIRANHA_TIMEOUT))
+	if ((state == PIRANHA_STATE_UP) && (GetTickCount64() - up_start > (isVenus? PIRANHA_TIMEOUT: PIRANHA_TIMEOUT - 100)))
 	{	
 		SetState(PIRANHA_STATE_DOWN);
 	} 
-	else if ((state == PIRANHA_STATE_DOWN) && (GetTickCount64() - up_start > PIRANHA_TIMEOUT))
+	else if ((state == PIRANHA_STATE_DOWN) && (GetTickCount64() - up_start > (isVenus ? PIRANHA_TIMEOUT : PIRANHA_TIMEOUT - 100)))
 	{		
 		SetState(PIRANHA_STATE_WAIT);
 	}

@@ -53,6 +53,8 @@
 #define VENUS_IDLE_TIMEOUT 2000
 #define VENUS_FIRE_TIMEOUT 2000
 
+#define VENUS_TIMEOUT 1300
+
 
 
 class CPiranha : public CGameObject
@@ -62,6 +64,7 @@ protected:
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e) { return; };
 	ULONGLONG up_start, wait_start;		
 	float y_fixed, speed;
+	bool isVenus;
 public:
 	CPiranha(float x, float y) : CGameObject(x, y) {
 		up_start = -1;
@@ -69,6 +72,7 @@ public:
 		SetState(PIRANHA_STATE_WAIT);
 		y_fixed = y;
 		speed = PIRANHA_SPEED;
+		isVenus = false;
 		
 	};
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
@@ -99,6 +103,7 @@ public:
 		x_mario = 0;
 		y_mario = 0;
 		fire_ball_added = 0;
+		isVenus = true;
 	};
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 	void Render();
