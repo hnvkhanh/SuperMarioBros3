@@ -11,6 +11,7 @@ semiwood.txt
 background-cloud.txt
 pipe-rectangle.txt
 decoration.txt
+pswitch.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
@@ -139,7 +140,10 @@ decoration.txt
 17	1984	368
 17	2000	368
 17	2016	368
+#PSwitch Glass Brick
+18	2032	368
 17	2032	368
+
 
 #Coin
 4	1073	320

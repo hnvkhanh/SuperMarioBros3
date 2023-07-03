@@ -1,5 +1,6 @@
 #include "Brick.h"
 #include "Game.h"
+#include "PlayScene.h"
 #include "Coin.h"
 
 void CBrick::Render()
@@ -25,5 +26,10 @@ void CGlassBrick::Render()
 }
 
 void CGlassBrick::BrickTransformCoin() {
-	// to do
+	if ((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene()) {
+		this->Delete();
+
+		CGameObject* coin = new CCoin(x, y);
+		((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetObjects().push_back(coin);
+	}
 }
