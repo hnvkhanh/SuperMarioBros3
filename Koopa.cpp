@@ -101,6 +101,16 @@ void CKoopa::OnCollisionWithPrizeBlock(LPCOLLISIONEVENT e)
 	}
 }
 
+void CKoopa::OnCollisionWithGlassBrick(LPCOLLISIONEVENT e)
+{
+	CGlassBrick* brick = dynamic_cast<CGlassBrick*>(e->obj);
+	
+	if (e->nx != 0)
+	{
+		//to do
+	}
+}
+
 void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	float cx, cy;

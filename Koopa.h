@@ -82,6 +82,7 @@ protected:
 	virtual void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
 	virtual void OnCollisionWithParaGoomba(LPCOLLISIONEVENT e);
 	virtual void OnCollisionWithPrizeBlock(LPCOLLISIONEVENT e);
+	virtual void OnCollisionWithGlassBrick(LPCOLLISIONEVENT e);
 
 public:
 	CKoopa(float x, float y, int c);
