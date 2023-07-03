@@ -2,10 +2,10 @@
 
 CGoomba::CGoomba(float x, float y):CGameObject(x, y)
 {
-	this->frozen = true;
+	/*this->frozen = true;*/
 	this->ax = 0;
 	this->ay = GOOMBA_GRAVITY;
-	started_flag = false;
+	/*started_flag = false;*/
 	die_start = -1;
 	bounce_start = -1;
 	SetState(GOOMBA_STATE_WALKING);
@@ -64,6 +64,8 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	if (frozen) {
 		return;
 	}
+	
+
 	vy += ay * dt;
 	vx += ax * dt;
 
@@ -173,7 +175,7 @@ void CParaGoomba::GetBoundingBox(float& left, float& top, float& right, float& b
 
 void CParaGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {	
-	float cx, cy, cw, ch;
+	float cx, cy;
 	CGame::GetInstance()->GetCamPos(cx, cy);
 	if ((x >= cx && x <= cx + 320) && !started_flag) {
 		frozen = false;
@@ -182,6 +184,7 @@ void CParaGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (frozen) {
 		return;
 	}
+	
 	
 
 	if (state == PARAGOOMBA_STATE_WING_JUMPING) {

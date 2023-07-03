@@ -34,6 +34,7 @@ protected:
 	int state;
 
 	bool isDeleted; 
+	bool frozen, started_flag;
 
 public: 
 
@@ -49,7 +50,12 @@ public:
 	void RenderBoundingBox();
 
 	CGameObject();
-	CGameObject(float x, float y) :CGameObject() { this->x = x; this->y = y; }
+	CGameObject(float x, float y) :CGameObject() { 
+		this->x = x;
+		this->y = y; 
+		this->frozen = true;
+		started_flag = false;
+	}
 
 
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom) = 0;
@@ -76,5 +82,5 @@ public:
 
 	~CGameObject();
 
-	static bool IsDeleted(const LPGAMEOBJECT &o) { return o->isDeleted; }
+	static bool IsDeleted(const LPGAMEOBJECT &o) { return o->isDeleted; }	
 };

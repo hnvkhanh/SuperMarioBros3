@@ -103,6 +103,16 @@ void CKoopa::OnCollisionWithPrizeBlock(LPCOLLISIONEVENT e)
 
 void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	float cx, cy;
+	CGame::GetInstance()->GetCamPos(cx, cy);
+	if ((x >= cx && x <= cx + 320) && !started_flag) {
+		frozen = false;
+		started_flag = true;
+	}
+	if (frozen) {
+		return;
+	}
+
 	if (state == KOOPA_STATE_SHELL_HOLD) {
 		return;
 	}
@@ -235,6 +245,15 @@ void CKoopa::SetState(int state)
 
 void CParaTroopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	float cx, cy;
+	CGame::GetInstance()->GetCamPos(cx, cy);
+	if ((x >= cx && x <= cx + 320) && !started_flag) {
+		frozen = false;
+		started_flag = true;
+	}
+	if (frozen) {
+		return;
+	}
 
 	if ((state == PARATROOPA_STATE_FLY_UP) && (GetTickCount64() - fly_start > PARATROOPA_FLY_TIMEOUT)) {
 		SetState(PARATROOPA_STATE_FLY_DOWN);
