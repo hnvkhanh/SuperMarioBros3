@@ -153,6 +153,7 @@
     <ClInclude Include="Portal.h" />
     <ClInclude Include="Prize.h" />
     <ClInclude Include="PrizeBlock.h" />
+    <ClInclude Include="PSwitch.h" />
     <ClInclude Include="SampleKeyEventHandler.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sprite.h" />
@@ -182,6 +183,7 @@
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Prize.cpp" />
     <ClCompile Include="PrizeBlock.cpp" />
+    <ClCompile Include="PSwitch.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
     <ClCompile Include="Scence.cpp" />
     <ClCompile Include="Sprite.cpp" />

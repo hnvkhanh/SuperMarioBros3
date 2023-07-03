@@ -1,4 +1,6 @@
 #include "Brick.h"
+#include "Game.h"
+#include "Coin.h"
 
 void CBrick::Render()
 {
@@ -20,4 +22,8 @@ void CGlassBrick::Render()
 	CAnimations* animations = CAnimations::GetInstance();
 	animations->Get(ID_ANI_GLASS_BRICK)->Render(x, y);
 	RenderBoundingBox();
+}
+
+void CGlassBrick::BrickTransformCoin() {
+	// to do
 }

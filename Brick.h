@@ -22,4 +22,5 @@ class CGlassBrick : public CBrick {
 public:
 	CGlassBrick(float x, float y) : CBrick(x, y) {}
 	void Render();
+	void BrickTransformCoin();
 };
