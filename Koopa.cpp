@@ -106,8 +106,8 @@ void CKoopa::OnCollisionWithGlassBrick(LPCOLLISIONEVENT e)
 	CGlassBrick* brick = dynamic_cast<CGlassBrick*>(e->obj);
 	
 	if (e->nx != 0)
-	{
-		//to do
+	{	
+		brick->Delete();
 	}
 }
 

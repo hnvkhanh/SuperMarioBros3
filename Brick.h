@@ -3,12 +3,16 @@
 #include "GameObject.h"
 #include "Animation.h"
 #include "Animations.h"
+#include "PSwitch.h"
 
 #define ID_ANI_BRICK 10000
 #define ID_ANI_GLASS_BRICK 10003
 #define BRICK_WIDTH 15
 #define BRICK_BBOX_WIDTH 15
 #define BRICK_BBOX_HEIGHT 15
+
+#define GLASSBRICK_CONTAIN_COIN					0
+#define GLASSBRICK_CONTAIN_SWITCH				1
 
 class CBrick : public CGameObject {
 public:
@@ -19,8 +23,12 @@ public:
 };
 
 class CGlassBrick : public CBrick {
+protected:
+	int containObject;
 public:
-	CGlassBrick(float x, float y) : CBrick(x, y) {}
+	CGlassBrick(float x, float y, int contain_object=0) : CBrick(x, y) {
+		containObject = contain_object;
+	}
 	void Render();
 	void BrickTransformCoin();
 };

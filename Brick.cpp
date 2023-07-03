@@ -26,10 +26,11 @@ void CGlassBrick::Render()
 }
 
 void CGlassBrick::BrickTransformCoin() {
-	if ((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene()) {
+	if (containObject == GLASSBRICK_CONTAIN_COIN
+		&& (LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene()) {
 		this->Delete();
 
-		CGameObject* coin = new CCoin(x, y);
+		CGameObject* coin = new CCoin(x, y, COIN_TRANSFORMED_FROM_BRICK);
 		((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetObjects().push_back(coin);
 	}
 }

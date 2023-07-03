@@ -1,4 +1,7 @@
 #include "Coin.h"
+#include "Game.h"
+#include "PlayScene.h"
+#include "Brick.h"
 
 void CCoin::Render()
 {
@@ -14,4 +17,19 @@ void CCoin::GetBoundingBox(float& l, float& t, float& r, float& b)
 	t = y - COIN_BBOX_HEIGHT / 2;
 	r = l + COIN_BBOX_WIDTH;
 	b = t + COIN_BBOX_HEIGHT;
+}
+
+void CCoin::CoinTransformBrick() {
+	if (GetTickCount64() - remain_start >= COIN_TIMEOUT)
+		if ((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene()) {
+			this->Delete();
+
+			CGameObject* brick = new CGlassBrick(x, y);
+			((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetObjects().push_back(brick);
+		}
+}
+
+void CCoin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
+	if (remain_start) CoinTransformBrick();
+
 }
