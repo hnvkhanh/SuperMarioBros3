@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "PlayScene.h"
 #include "Coin.h"
+#include "Effect.h"
 
 void CBrick::Render()
 {
@@ -38,4 +39,5 @@ void CGlassBrick::BrickTransformCoin() {
 void CGlassBrick::BrickBreak()
 {
 	this->Delete();
+	CEffect::GetInstance()->pushEffectIntoQueue(x, y, ID_ANI_EFFECT_BRICK_BREAK, false, false);
 }

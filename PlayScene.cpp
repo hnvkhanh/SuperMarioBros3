@@ -18,6 +18,7 @@
 #include "Prize.h"
 #include "Piranha.h"
 #include "InvisibleObject.h"
+#include "Effect.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -377,6 +378,8 @@ void CPlayScene::Update(DWORD dt)
 		
 	}
 
+	CEffect::GetInstance()->Update(dt);
+
 	// skip the rest if scene was already unloaded (Mario::Update might trigger PlayScene::Unload)
 	if (player == NULL) return; 
 
@@ -415,6 +418,8 @@ void CPlayScene::Render()
 {
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
+	
+	CEffect::GetInstance()->Render();
 }
 
 /*

@@ -1,0 +1,15 @@
+# id	left	top	right	bottom	texture_id
+
+[SPRITES]
+# BRICK BREAK
+83000	595	69	609	83	20
+83001	612	67	628	85	20	
+
+
+
+
+
+# ani_id	sprite1_id	time1	sprite2_id	time2	...
+
+[ANIMATIONS]
+8301	83000	100	83001	100
