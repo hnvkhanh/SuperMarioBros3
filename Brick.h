@@ -31,4 +31,5 @@ public:
 	}
 	void Render();
 	void BrickTransformCoin();
+	void BrickBreak();
 };

@@ -53,6 +53,11 @@ void CKoopa::OnCollisionWith(LPCOLLISIONEVENT e)
 		if (e->obj->GetState() == PRIZEBLOCK_STATE_MYSTIC)
 			OnCollisionWithPrizeBlock(e);
 	}
+	else if (dynamic_cast<CGlassBrick*>(e->obj)) {
+		if (state == KOOPA_STATE_DIE_SLIDE_LEFT || state == KOOPA_STATE_DIE_SLIDE_RIGHT) {
+			OnCollisionWithGlassBrick(e);
+		}		
+	}
 
 	if (e->ny != 0)
 	{		
@@ -105,10 +110,7 @@ void CKoopa::OnCollisionWithGlassBrick(LPCOLLISIONEVENT e)
 {
 	CGlassBrick* brick = dynamic_cast<CGlassBrick*>(e->obj);
 	
-	if (e->nx != 0)
-	{	
-		brick->Delete();
-	}
+	brick->BrickBreak();
 }
 
 void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)

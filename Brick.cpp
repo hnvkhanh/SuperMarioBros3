@@ -34,3 +34,8 @@ void CGlassBrick::BrickTransformCoin() {
 		((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetObjects().push_back(coin);
 	}
 }
+
+void CGlassBrick::BrickBreak()
+{
+	this->Delete();
+}
