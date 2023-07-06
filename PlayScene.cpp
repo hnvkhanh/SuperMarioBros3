@@ -133,7 +133,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_PARATROOPA: 
 		obj = new CParaTroopa(x, y, atoi(tokens[3].c_str())); break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
-	case OBJECT_TYPE_GLASS_BRICK: obj = new CGlassBrick(x, y, atoi(tokens[3].c_str())); break;
+	case OBJECT_TYPE_GLASS_BRICK: 
+		obj = new CGlassBrick(x, y, atoi(tokens[3].c_str())); break;
 	case OBJECT_TYPE_PRIZEBLOCK: 		
 		obj = new CPrizeBlock(x, y, atoi(tokens[3].c_str())); break;
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;	
@@ -373,6 +374,17 @@ void CPlayScene::Update(DWORD dt)
 				venus->IncreaseFireBall();
 				venus->GetPosition(x, y);
 				objects.insert(objects.begin() + i, new CFireBall(x, y - VENUS_BBOX_HEIGHT / 3, x_mario, y_mario));								
+			}
+		}
+		else if (dynamic_cast<CGlassBrick*>(objects[i])) {
+			CGlassBrick* glassBrick = dynamic_cast<CGlassBrick*>(objects[i]);
+			if (glassBrick->getContainObject() == 1 && glassBrick->getBroken() && !glassBrick->getKnown()) {
+				glassBrick->setKnown();
+
+				float x, y;
+
+				glassBrick->GetPosition(x, y);
+				objects.insert(objects.begin() + i, new CBrick(x, y - BRICK_BBOX_HEIGHT / 2));				
 			}
 		}
 		

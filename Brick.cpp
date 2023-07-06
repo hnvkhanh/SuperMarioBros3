@@ -23,7 +23,7 @@ void CGlassBrick::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
 	animations->Get(idAni)->Render(x, y);
-	RenderBoundingBox();
+	/*RenderBoundingBox();*/
 }
 
 void CGlassBrick::BrickTransformCoin() {
@@ -44,5 +44,6 @@ void CGlassBrick::BrickBreak()
 	}
 	else {
 		idAni = ID_ANI_GLASS_BRICK_KNOWN;
+		broken = true;
 	}
 }

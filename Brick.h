@@ -28,12 +28,30 @@ class CGlassBrick : public CBrick {
 protected:
 	int containObject;
 	int idAni;
+	bool broken;
+	bool known;
 public:
 	CGlassBrick(float x, float y, int contain_object=0) : CBrick(x, y) {
 		containObject = contain_object;
 		idAni = ID_ANI_GLASS_BRICK;
+		broken = false;
+		known = false;
 	}
 	void Render();
 	void BrickTransformCoin();
 	void BrickBreak();
+	int getContainObject() {
+		return containObject;
+	}
+	bool getBroken() {
+		return broken;
+	}
+	void setKnown() {
+		known = true;
+	}
+	bool getKnown() {
+		return known;
+	}
+
+
 };
