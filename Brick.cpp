@@ -22,7 +22,7 @@ void CBrick::GetBoundingBox(float &l, float &t, float &r, float &b)
 void CGlassBrick::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
-	animations->Get(ID_ANI_GLASS_BRICK)->Render(x, y);
+	animations->Get(idAni)->Render(x, y);
 	RenderBoundingBox();
 }
 
@@ -38,6 +38,11 @@ void CGlassBrick::BrickTransformCoin() {
 
 void CGlassBrick::BrickBreak()
 {
-	this->Delete();
-	CEffect::GetInstance()->pushEffectIntoQueue(x, y, ID_ANI_EFFECT_BRICK_BREAK, false, false);
+	if (containObject != 1) {
+		this->Delete();
+		CEffect::GetInstance()->pushEffectIntoQueue(x, y, ID_ANI_EFFECT_BRICK_BREAK, false, false);
+	}
+	else {
+		idAni = ID_ANI_GLASS_BRICK_KNOWN;
+	}
 }

@@ -110,7 +110,7 @@ void CKoopa::OnCollisionWithGlassBrick(LPCOLLISIONEVENT e)
 {
 	CGlassBrick* brick = dynamic_cast<CGlassBrick*>(e->obj);
 	
-	brick->BrickBreak();
+	brick->BrickBreak();	
 }
 
 void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)

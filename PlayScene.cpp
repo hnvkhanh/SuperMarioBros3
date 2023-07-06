@@ -133,7 +133,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_PARATROOPA: 
 		obj = new CParaTroopa(x, y, atoi(tokens[3].c_str())); break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
-	case OBJECT_TYPE_GLASS_BRICK: obj = new CGlassBrick(x, y); break;
+	case OBJECT_TYPE_GLASS_BRICK: obj = new CGlassBrick(x, y, atoi(tokens[3].c_str())); break;
 	case OBJECT_TYPE_PRIZEBLOCK: 		
 		obj = new CPrizeBlock(x, y, atoi(tokens[3].c_str())); break;
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;	
