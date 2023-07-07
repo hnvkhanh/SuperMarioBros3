@@ -2,8 +2,8 @@
 
 #include "GameObject.h"
 
-#define ID_ANI_PSWITCH						8010 
-#define ID_ANI_PSWITCH_ACTIVED				8011 // after collide with Mario
+#define ID_ANI_PSWITCH						8810 
+#define ID_ANI_PSWITCH_ACTIVED				8811 // after collide with Mario
 
 #define PSWITCH_BBOX_WIDTH					15
 #define PSWITCH_BBOX_HEIGHT					15

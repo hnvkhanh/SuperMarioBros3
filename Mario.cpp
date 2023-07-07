@@ -104,6 +104,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithPiranha(e);
 	else if (dynamic_cast<CFireBall*>(e->obj))
 		OnCollisionWithFireBall(e);
+	else if (dynamic_cast<CPSwitch*>(e->obj))
+		OnCollisionWithPSwitch(e);
 
 }
 
@@ -164,6 +166,12 @@ void CMario::OnCollisionWithFireBall(LPCOLLISIONEVENT e)
 
 		e->obj->Delete();
 	}
+}
+
+void CMario::OnCollisionWithPSwitch(LPCOLLISIONEVENT e)
+{
+	CPSwitch* pswitch = dynamic_cast<CPSwitch*>(e->obj);
+	pswitch->IsActived();
 }
 
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)

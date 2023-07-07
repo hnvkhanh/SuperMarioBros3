@@ -9,7 +9,7 @@ void CPSwitch::Render() {
 	CAnimations* animations = CAnimations::GetInstance();
 	animations->Get(aniId)->Render(x, y);
 
-	//RenderBoundingBox();
+	/*RenderBoundingBox();*/
 }
 
 void CPSwitch::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {

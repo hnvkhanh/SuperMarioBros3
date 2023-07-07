@@ -19,6 +19,7 @@
 #include "Piranha.h"
 #include "InvisibleObject.h"
 #include "Effect.h"
+#include "PSwitch.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -133,6 +134,10 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_PARATROOPA: 
 		obj = new CParaTroopa(x, y, atoi(tokens[3].c_str())); break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
+	case OBJECT_TYPE_PSWITCH: 
+		obj = new CPSwitch(x, y); 
+		DebugOut(L"create pswitch\n");
+		break;
 	case OBJECT_TYPE_GLASS_BRICK: 
 		obj = new CGlassBrick(x, y, atoi(tokens[3].c_str())); break;
 	case OBJECT_TYPE_PRIZEBLOCK: 		
@@ -230,8 +235,6 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		{
 			objects.push_back(new CVenusFireTrap(x + VENUS_BBOX_WIDTH / 2, y + VENUS_BBOX_HEIGHT / 2));
 		}
-
-		DebugOut(L"pipe height = %d\n", length);
 
 		obj = new CPipe(
 			x, y,
@@ -384,7 +387,7 @@ void CPlayScene::Update(DWORD dt)
 				float x, y;
 
 				glassBrick->GetPosition(x, y);
-				objects.insert(objects.begin() + i, new CBrick(x, y - BRICK_BBOX_HEIGHT / 2));				
+				objects.insert(objects.begin() + i, new CBrick(x, y - BRICK_BBOX_HEIGHT / 2 - 50));				
 			}
 		}
 		
