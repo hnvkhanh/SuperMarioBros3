@@ -9,6 +9,7 @@
 #include "Goomba.h"
 #include "Coin.h"
 
+#include "PhaseChecker.h"
 
 #define KOOPA_GRAVITY 0.002f
 #define KOOPA_WALKING_SPEED 0.05f
@@ -59,6 +60,10 @@
 #define ID_ANI_RED_PARATROOPA_FLY_LEFT 6102
 #define ID_ANI_RED_PARATROOPA_FLY_RIGHT 6103
 
+// Phase Checker
+#define KOOPA_TROOPA_PHASE_CHECK_WIDTH				14
+#define KOOPA_TROOPA_PHASE_CHECK_HEIGHT				24
+
 
 class CKoopa : public CGameObject
 {
@@ -69,6 +74,7 @@ protected:
 	bool is_hold;
 	ULONGLONG die_start;
 	ULONGLONG revive_start;
+	CGameObject* phaseCheck;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);

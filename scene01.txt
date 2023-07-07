@@ -104,7 +104,7 @@ effect.txt
 
 
 # MARIO
-0	1800	300
+0	100	300
 
 #prize block
 #id	x	y	type_of_prize

@@ -5,6 +5,10 @@
 
 CKoopa::CKoopa(float x, float y, int c) :CGameObject(x, y)
 {	
+	phaseCheck = new CPhaseChecker(x - KOOPA_BBOX_WIDTH - KOOPA_TROOPA_PHASE_CHECK_WIDTH / 2, y,
+		KOOPA_TROOPA_PHASE_CHECK_WIDTH, KOOPA_TROOPA_PHASE_CHECK_HEIGHT);
+	phaseCheck->SetSpeed(0, KOOPA_WALKING_SPEED);
+
 	this->color = c;
 	this->ax = 0;
 	this->ay = KOOPA_GRAVITY;
@@ -66,6 +70,14 @@ void CKoopa::OnCollisionWith(LPCOLLISIONEVENT e)
 	else if (e->nx != 0)
 	{					
 		vx = -vx;				
+
+		float p_vx, p_vy;
+		phaseCheck->GetSpeed(p_vx, p_vy);
+
+		if (p_vx >= this->vx)
+			phaseCheck->SetPosition(x - KOOPA_BBOX_WIDTH, y);
+		else
+			phaseCheck->SetPosition(x + KOOPA_BBOX_WIDTH, y);
 		
 		if (state == KOOPA_WALK_TO_RIGHT) {
 			SetState(KOOPA_WALK_TO_LEFT);
@@ -74,6 +86,26 @@ void CKoopa::OnCollisionWith(LPCOLLISIONEVENT e)
 			SetState(KOOPA_WALK_TO_RIGHT);
 		}
 	}
+
+	float px, py;
+	phaseCheck->GetPosition(px, py);
+
+	if (py - this->y > 10 && state != KOOPA_STATE_SHELL) {
+		vx = -vx;
+
+		if (state == KOOPA_WALK_TO_RIGHT) {
+			SetState(KOOPA_WALK_TO_LEFT);
+		}
+		else if (state == KOOPA_WALK_TO_LEFT) {
+			SetState(KOOPA_WALK_TO_RIGHT);
+		}
+
+		if (px <= this->x)
+			phaseCheck->SetPosition(x + KOOPA_BBOX_WIDTH, y);
+		else phaseCheck->SetPosition(x - KOOPA_BBOX_WIDTH, y);
+	}
+
+	phaseCheck->SetSpeed(vx, 1);
 	
 }
 
@@ -134,11 +166,14 @@ void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if ((state == KOOPA_STATE_SHELL) && (GetTickCount64() - die_start > KOOPA_DIE_TIMEOUT))
 	{
 		SetState(KOOPA_STATE_REVIVE);
+		
 	}
 	else if ((state == KOOPA_STATE_REVIVE) && (GetTickCount64() - revive_start > KOOPA_REVIVE_TIMEOUT))
 	{
 		SetState(KOOPA_WALK_TO_LEFT);
 	}
+	
+	if (state == KOOPA_WALK_TO_LEFT || state == KOOPA_WALK_TO_RIGHT) phaseCheck->Update(dt, coObjects);
 
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -228,6 +263,7 @@ void CKoopa::SetState(int state)
 			ay = KOOPA_GRAVITY;
 		}
 		vx = -KOOPA_WALKING_SPEED;
+		phaseCheck->SetPosition(x - KOOPA_BBOX_WIDTH - KOOPA_TROOPA_PHASE_CHECK_WIDTH / 2, y);
 		break;	
 	case KOOPA_WALK_TO_RIGHT:
 		if (previous_state == KOOPA_STATE_REVIVE) {
@@ -235,6 +271,7 @@ void CKoopa::SetState(int state)
 			ay = KOOPA_GRAVITY;
 		}
 		vx = KOOPA_WALKING_SPEED;
+		phaseCheck->SetPosition(x - KOOPA_BBOX_WIDTH - KOOPA_TROOPA_PHASE_CHECK_WIDTH / 2, y);
 		break;
 	case KOOPA_STATE_DIE_SLIDE_RIGHT:
 		vx = KOOPA_SLIDING_SPEED;		
