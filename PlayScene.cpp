@@ -387,7 +387,7 @@ void CPlayScene::Update(DWORD dt)
 				float x, y;
 
 				glassBrick->GetPosition(x, y);
-				objects.insert(objects.begin() + i, new CBrick(x, y - BRICK_BBOX_HEIGHT / 2 - 50));				
+				objects.insert(objects.begin() + i, new CPSwitch(x, y));				
 			}
 		}
 		
